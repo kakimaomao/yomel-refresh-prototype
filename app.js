@@ -217,7 +217,11 @@
     liveLineIndex++;
     content.appendChild(bubble);
     requestAnimationFrame(function(){ bubble.classList.add("bubble-enter-active"); });
-    if(isFollowingLatest) content.scrollTop = content.scrollHeight;
+    // smooth, not an instant scrollTop jump — the very first bubble that
+    // pushes content taller than the viewport used to snap straight to the
+    // bottom in one frame, which made the header collapse (maxHeight/opacity
+    // driven by scrollTop) look like a jarring jump instead of a transition.
+    if(isFollowingLatest) content.scrollTo({top: content.scrollHeight, behavior: "smooth"});
   }
   function startLiveTranscript(){
     if(transcriptAppendInterval) return;

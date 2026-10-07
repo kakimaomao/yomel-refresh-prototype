@@ -1081,7 +1081,7 @@ body.desktop-shell #indexBtn{
   <style>
     #scr-recording-active .screen{position:absolute; top:51px; left:0; right:0; bottom:0; display:flex; flex-direction:column; overflow:hidden;}
     #scr-recording-active .header{flex-shrink:0; border-bottom:1px solid rgba(0,0,0,.15); padding:42px 24px 0; display:flex; flex-direction:column; gap:32px;}
-    #scr-recording-active .title-row{display:flex; flex-direction:column; gap:20px; overflow:hidden;}
+    #scr-recording-active .title-row{display:flex; flex-direction:column; gap:20px; overflow:hidden; transition:max-height .25s ease, opacity .25s ease;}
     #scr-recording-active .title-edit-row{display:block;}
     #scr-recording-active .title-placeholder{display:inline; font-size:24px; font-weight:600; color:var(--text); line-height:1.3; min-width:1px; white-space:normal; word-break:break-word;}
     #scr-recording-active .title-edit-icon{width:20px; height:20px; display:inline-block; vertical-align:middle; margin-left:4px;}
@@ -1189,7 +1189,7 @@ body.desktop-shell #indexBtn{
   <style>
     #scr-recording-paused-transcript .screen{position:absolute; top:51px; left:0; right:0; bottom:0; display:flex; flex-direction:column; overflow:hidden;}
     #scr-recording-paused-transcript .header{flex-shrink:0; border-bottom:1px solid rgba(0,0,0,.15); padding:42px 24px 0; display:flex; flex-direction:column; gap:32px;}
-    #scr-recording-paused-transcript .title-row{display:flex; flex-direction:column; gap:20px; overflow:hidden;}
+    #scr-recording-paused-transcript .title-row{display:flex; flex-direction:column; gap:20px; overflow:hidden; transition:max-height .25s ease, opacity .25s ease;}
     #scr-recording-paused-transcript .title-line{display:block;}
     #scr-recording-paused-transcript .title-line .title{display:inline; font-size:24px; font-weight:600; color:var(--text); line-height:1.3; min-width:1px; white-space:normal; word-break:break-word; cursor:text;}
     #scr-recording-paused-transcript .title-line img{width:20px; height:20px; display:inline-block; vertical-align:middle; margin-left:4px; cursor:pointer;}
@@ -1372,7 +1372,7 @@ body.desktop-shell #indexBtn{
     #scr-recording-paused-loginfo .screen{position:absolute; top:51px; left:0; right:0; bottom:0; display:flex; flex-direction:column; overflow:hidden;}
     #scr-recording-paused-loginfo .header{flex-shrink:0; border-bottom:1px solid rgba(0,0,0,.15); padding:42px 24px 0; display:flex; flex-direction:column; gap:32px;}
     #scr-recording-paused-loginfo .header.offline-mode{border-bottom:none; padding:26px 24px 0;}
-    #scr-recording-paused-loginfo .title-row{display:flex; flex-direction:column; gap:20px; overflow:hidden;}
+    #scr-recording-paused-loginfo .title-row{display:flex; flex-direction:column; gap:20px; overflow:hidden; transition:max-height .25s ease, opacity .25s ease;}
     #scr-recording-paused-loginfo .title-line{display:block;}
     #scr-recording-paused-loginfo .title-line .title{display:inline; font-size:24px; font-weight:600; color:var(--text); line-height:1.3; min-width:1px; white-space:normal; word-break:break-word; cursor:text;}
     #scr-recording-paused-loginfo .title-line img{width:20px; height:20px; display:inline-block; vertical-align:middle; margin-left:4px; cursor:pointer;}
@@ -3561,7 +3561,11 @@ body.desktop-shell #indexBtn{
     liveLineIndex++;
     content.appendChild(bubble);
     requestAnimationFrame(function(){ bubble.classList.add("bubble-enter-active"); });
-    if(isFollowingLatest) content.scrollTop = content.scrollHeight;
+    // smooth, not an instant scrollTop jump — the very first bubble that
+    // pushes content taller than the viewport used to snap straight to the
+    // bottom in one frame, which made the header collapse (maxHeight/opacity
+    // driven by scrollTop) look like a jarring jump instead of a transition.
+    if(isFollowingLatest) content.scrollTo({top: content.scrollHeight, behavior: "smooth"});
   }
   function startLiveTranscript(){
     if(transcriptAppendInterval) return;
