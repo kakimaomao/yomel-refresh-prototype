@@ -5135,14 +5135,25 @@ body.desktop-shell #indexBtn{
     var titleRow = header && header.querySelector(".title-row");
     if(!content || !header || !titleRow) return;
     content.addEventListener("scroll", function(){
-      transcriptEverScrolled = true;
-      var naturalHeight = getNaturalTitleRowHeight(slug, titleRow);
-      var progress = Math.min(1, Math.max(0, content.scrollTop / naturalHeight));
-      sharedHeaderProgress = progress;
-      titleRow.style.maxHeight = progress <= 0 ? "" : ((1 - progress) * naturalHeight) + "px";
-      titleRow.style.opacity = String(1 - progress);
-      header.classList.toggle("collapsed", progress >= 1);
-      updateScrollToBottomFab(root, content);
+      // while recording-active is auto-following live growth (not a genuine
+      // user drag), this scroll event is just the programmatic "keep the
+      // latest bubble in view" catch-up — it shouldn't drive the header
+      // collapse (that's reserved for real manual scrolling, per explicit
+      // request) nor flash the "scroll to bottom" FAB on its way there.
+      var isAutoFollowScroll = slug === "recording-active" && isFollowingLatest;
+      if(!isAutoFollowScroll){
+        transcriptEverScrolled = true;
+        var naturalHeight = getNaturalTitleRowHeight(slug, titleRow);
+        var progress = Math.min(1, Math.max(0, content.scrollTop / naturalHeight));
+        sharedHeaderProgress = progress;
+        titleRow.style.maxHeight = progress <= 0 ? "" : ((1 - progress) * naturalHeight) + "px";
+        titleRow.style.opacity = String(1 - progress);
+        header.classList.toggle("collapsed", progress >= 1);
+        updateScrollToBottomFab(root, content);
+      } else {
+        var fab = root.querySelector(".scroll-to-bottom");
+        if(fab) fab.classList.remove("show");
+      }
       if(slug === "recording-active" && (content.scrollHeight - content.scrollTop - content.clientHeight) < 40){
         isFollowingLatest = true;
       }
