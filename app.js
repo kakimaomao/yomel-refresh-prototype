@@ -799,6 +799,12 @@
     var isOffline = returnSlug === "recording-offline-active" || returnSlug === "recording-offline-paused";
     var span = document.querySelector('#scr-recording-paused-loginfo [data-tap="switch-tab:transcript"] span');
     if(span) span.textContent = isOffline ? "録音" : "書き起こし";
+    // the offline recording screens use a shorter header (no divider line,
+    // less top padding — Figma 5270:78731) than the online ones; ログ情報
+    // is shared between both, so it has to match whichever one it was
+    // reached from or switching tabs visibly jumps the whole header.
+    var header = document.querySelector("#scr-recording-paused-loginfo .header");
+    if(header) header.classList.toggle("offline-mode", isOffline);
   }
 
   function goBack(){
