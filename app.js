@@ -419,10 +419,71 @@
     });
   }
 
+  // simulated playback for whichever row's inline player is expanded — one
+  // shared state object is enough since only one row is ever expanded at a
+  // time (same reasoning as the single <template> itself). Defaults match
+  // the template's own static markup (04:29 elapsed / 31:08 remaining, fill
+  // paused) so a freshly-expanded row needs no JS sync to look right.
+  var playerState = {playing: false, elapsedSec: 269, totalSec: 2137, timer: null};
+  function formatPlayerTime(sec){
+    sec = Math.max(0, Math.round(sec));
+    var m = Math.floor(sec / 60), s = sec % 60;
+    return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  }
+  function updatePlayerUI(){
+    var root = document.getElementById("scr-upload-pending-row-player");
+    // scoped to the specific expanding card (not just "whichever matches
+    // first in the board") — a collapsing card's old player content is only
+    // removed once its own animation finishes, so right after switching rows
+    // both the old and new card can briefly coexist in the DOM, and the old
+    // one sorts first in document order for rec-1..rec-3.
+    var card = root && recCard(root, expandedRec);
+    var fill = card && card.querySelector(".player-fill");
+    if(!fill) return;
+    var times = card.querySelectorAll(".player-times span");
+    var btn = card.querySelector('[data-tap="toggle:play:current"]');
+    var pct = playerState.totalSec > 0 ? Math.min(1, playerState.elapsedSec / playerState.totalSec) : 0;
+    fill.style.width = (pct * 100) + "%";
+    if(times[0]) times[0].textContent = formatPlayerTime(playerState.elapsedSec);
+    if(times[1]) times[1].textContent = formatPlayerTime(playerState.totalSec - playerState.elapsedSec);
+    if(btn){
+      btn.src = "assets/" + (playerState.playing ? "icon-pause-button-circle.svg" : "play-button-circle.svg");
+      btn.alt = playerState.playing ? "一時停止" : "再生";
+    }
+  }
+  function pausePlayer(){
+    playerState.playing = false;
+    if(playerState.timer){ clearInterval(playerState.timer); playerState.timer = null; }
+    updatePlayerUI();
+  }
+  function playPlayer(){
+    if(playerState.playing || playerState.elapsedSec >= playerState.totalSec) return;
+    playerState.playing = true;
+    playerState.timer = setInterval(function(){
+      playerState.elapsedSec += 1;
+      if(playerState.elapsedSec >= playerState.totalSec){
+        playerState.elapsedSec = playerState.totalSec;
+        pausePlayer();
+        return;
+      }
+      updatePlayerUI();
+    }, 1000);
+    updatePlayerUI();
+  }
+  function togglePlayerPlayPause(){
+    if(playerState.playing) pausePlayer(); else playPlayer();
+  }
+
   function expandRowPlayer(num, animate){
     var root = document.getElementById("scr-upload-pending-row-player");
     if(!root) return;
     var tpl = document.getElementById("rowPlayerTemplate");
+    if(expandedRec !== num){
+      playerState.playing = false;
+      if(playerState.timer){ clearInterval(playerState.timer); playerState.timer = null; }
+      playerState.elapsedSec = 269;
+      playerState.totalSec = 2137;
+    }
     // A card needs to change if EITHER signal disagrees with the target:
     // - the "rec-card--expanded" class (the DOM's own record — this is what
     //   onScreenShown's resync call relies on, since right after a jump every
@@ -460,9 +521,10 @@
       changes.forEach(function(c){ c.mutateClass(); if(c.expanding) c.insertContent(); else c.removeContent(); });
     }
     expandedRec = num;
+    updatePlayerUI();
   }
   function toggleRowPlayer(num){
-    if(expandedRec === num){ goBack(); return; }
+    if(expandedRec === num){ pausePlayer(); goBack(); return; }
     expandRowPlayer(num, true);
   }
 
@@ -1101,7 +1163,7 @@
     },
     "upload-pending-row-player|seek:back15:current": function(){ toast("15秒戻す（デモ）"); },
     "upload-pending-row-player|seek:fwd15:current": function(){ toast("15秒進める（デモ）"); },
-    "upload-pending-row-player|toggle:play:current": function(){ toast("再生／一時停止（デモ）"); },
+    "upload-pending-row-player|toggle:play:current": function(){ togglePlayerPlayPause(); },
 
     "upload-pending-select-mode|toggle:select-mode-off": function(){ goBack(); },
     "upload-pending-select-mode|toggle:select-all": function(){ toggleSelectAll(); },
