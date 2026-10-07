@@ -787,6 +787,14 @@
     loginfoReturnSlug = returnSlug;
     setRecordingPausedUI("recording-paused-loginfo", paused);
     syncLoginfoTabLabel(returnSlug);
+    // offline-active/-paused have no scrollable content of their own, so
+    // they never legitimately produce a collapsed header — any nonzero
+    // sharedHeaderProgress at this point is leftover from an unrelated
+    // online recording visited earlier (e.g. via the all-screens index) and
+    // would otherwise make ログ情報 open already collapsed (title hidden,
+    // tabs stuck to the top) for no reason tied to this screen.
+    var isOffline = returnSlug === "recording-offline-active" || returnSlug === "recording-offline-paused";
+    if(isOffline) sharedHeaderProgress = 0;
     goTo("recording-paused-loginfo", "fade");
   }
 
