@@ -1,0 +1,121 @@
+<section class="board" id="scr-login-space-id-keyboard">
+  <style>
+    /* styles scoped under #scr-login-space-id-keyboard — bespoke to this screen only. */
+    #scr-login-space-id-keyboard .bg-wave{
+      position:absolute; top:-220px; left:calc(50% + 15.31px); width:1113.54px; height:390.13px;
+      transform:translateX(-50%) rotate(7.97deg); z-index:0; pointer-events:none;
+    }
+    #scr-login-space-id-keyboard .btn{padding:20px 10px;}
+    #scr-login-space-id-keyboard .bg-wave img{display:block; width:100%; height:100%;}
+    #scr-login-space-id-keyboard .content{
+      position:absolute; left:0; top:187px; width:430px; padding:0 20px;
+      display:flex; flex-direction:column; gap:36px; z-index:1;
+    }
+    #scr-login-space-id-keyboard .logo{width:54px; height:37px;}
+    #scr-login-space-id-keyboard .logo img{display:block; width:100%; height:100%;}
+    #scr-login-space-id-keyboard .heading{
+      font-size:24px; font-weight:600; line-height:1.4; color:var(--text); margin:0;
+    }
+    #scr-login-space-id-keyboard .form{display:flex; flex-direction:column; gap:24px;}
+    #scr-login-space-id-keyboard .field-group{display:flex; flex-direction:column; gap:16px;}
+    #scr-login-space-id-keyboard .field-text.placeholder{color:var(--placeholder); font-size:17px; font-weight:300;}
+    #scr-login-space-id-keyboard .space-id-link{
+      display:flex; font-size:15px; line-height:1; cursor:pointer;
+    }
+    #scr-login-space-id-keyboard .space-id-link .g{color:var(--primary);}
+    #scr-login-space-id-keyboard .space-id-link .gray{color:var(--text-faint);}
+
+    /* --- iOS system keyboard (decorative chrome, covers the generic home indicator) --- */
+    #scr-login-space-id-keyboard .kb{
+      position:absolute; left:0; bottom:0; width:430px; height:370px;
+      background:#d1d3d9; overflow:hidden; z-index:60;
+    }
+    #scr-login-space-id-keyboard .kb-suggest{
+      display:flex; height:50px;
+    }
+    #scr-login-space-id-keyboard .kb-suggest span{
+      flex:1; display:flex; align-items:center; justify-content:center;
+      font:18px/1 "SF Pro Text",sans-serif; color:#000; border-right:1px solid rgba(0,0,0,.15);
+    }
+    #scr-login-space-id-keyboard .kb-suggest span:last-child{border-right:none;}
+    #scr-login-space-id-keyboard .kb-rows{padding:10px 3px 0;}
+    #scr-login-space-id-keyboard .kb-row{display:flex; gap:6px; margin-bottom:12px;}
+    #scr-login-space-id-keyboard .kb-row.mid{padding:0 18px;}
+    #scr-login-space-id-keyboard .kb-key{
+      flex:1; height:46px; background:#fff; border-radius:5px;
+      box-shadow:0 1px 0 rgba(0,0,0,.3);
+      display:flex; align-items:center; justify-content:center;
+      font:20px "SF Pro Display",sans-serif; color:#000;
+    }
+    #scr-login-space-id-keyboard .kb-key.wide{flex:0 0 42px; background:#abb0bc;}
+    #scr-login-space-id-keyboard .kb-key.space-row{font-size:16px;}
+    #scr-login-space-id-keyboard .kb-key.n123{flex:0 0 68px; background:#abb0bc;}
+    #scr-login-space-id-keyboard .kb-key.space{flex:1;}
+    #scr-login-space-id-keyboard .kb-key.return{flex:0 0 90px;}
+    #scr-login-space-id-keyboard .kb-home-indicator{
+      position:absolute; left:0; right:0; bottom:9px;
+      display:flex; justify-content:center;
+    }
+    #scr-login-space-id-keyboard .kb-home-indicator i{
+      display:block; width:140px; height:5px; border-radius:100px; background:#000;
+    }
+  </style>
+
+  <div class="bg-wave"><img src="../assets/bg-wave.svg" alt=""></div>
+
+  <!-- status bar (always the same: 9:41, full signal/wifi/battery) -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="content">
+    <div class="logo"><img src="../assets/yomel-logo.svg" alt="Yomel"></div>
+    <h1 class="heading">Yomel にログイン</h1>
+    <div class="form">
+      <div class="field-group">
+        <div class="field" data-tap="focus:space-id-input">
+          <span class="field-text placeholder">スペースIDを入力</span>
+        </div>
+        <div class="btn btn-disabled" data-tap="go:verify-space-id">次へ</div>
+      </div>
+      <div class="space-id-link" data-tap="open:space-id-info">
+        <span class="g">スペースID</span><span class="gray">とは</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- iOS system keyboard, shown because the space-ID field is focused -->
+  <div class="kb">
+    <div class="kb-suggest"><span>"Ios"</span><span>iOS</span><span>Ions</span></div>
+    <div class="kb-rows">
+      <div class="kb-row">
+        <div class="kb-key">q</div><div class="kb-key">w</div><div class="kb-key">e</div>
+        <div class="kb-key">r</div><div class="kb-key">t</div><div class="kb-key">y</div>
+        <div class="kb-key">u</div><div class="kb-key">i</div><div class="kb-key">o</div>
+        <div class="kb-key">p</div>
+      </div>
+      <div class="kb-row mid">
+        <div class="kb-key">a</div><div class="kb-key">s</div><div class="kb-key">d</div>
+        <div class="kb-key">f</div><div class="kb-key">g</div><div class="kb-key">h</div>
+        <div class="kb-key">j</div><div class="kb-key">k</div><div class="kb-key">l</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key wide">⇧</div>
+        <div class="kb-key">z</div><div class="kb-key">x</div><div class="kb-key">c</div>
+        <div class="kb-key">v</div><div class="kb-key">b</div><div class="kb-key">n</div>
+        <div class="kb-key">m</div>
+        <div class="kb-key wide">⌫</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key n123 space-row">123</div>
+        <div class="kb-key space space-row">space</div>
+        <div class="kb-key return space-row" data-tap="dismiss-keyboard">return</div>
+      </div>
+    </div>
+    <div class="kb-home-indicator"><i></i></div>
+  </div>
+
+  <!-- home indicator (covered by the keyboard above; kept per shared snippet contract) -->
+  <div class="home-indicator"><i></i></div>
+</section>

@@ -1,0 +1,76 @@
+<section class="board" id="scr-upload-pending-row-actions-sheet">
+  <style>
+    #scr-upload-pending-row-actions-sheet { background: transparent; }
+
+    #scr-upload-pending-row-actions-sheet .scrim {
+      position: absolute; inset: 0; background: rgba(0,0,0,.65); z-index: 60;
+      display: flex; align-items: flex-end;
+    }
+    #scr-upload-pending-row-actions-sheet .sheet {
+      width: 100%; background: #f2f3f5; border-radius: 8px 8px 0 0; padding-bottom: 40px;
+      display: flex; flex-direction: column; gap: 20px; cursor: default;
+    }
+    #scr-upload-pending-row-actions-sheet .sheet-header {
+      display: flex; align-items: flex-start; gap: 8px; padding: 20px 16px; border-bottom: 1px solid var(--border);
+    }
+    #scr-upload-pending-row-actions-sheet .sheet-icon {
+      width: 48px; height: 48px; border-radius: 8px; background: #fff; flex: none;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #scr-upload-pending-row-actions-sheet .sheet-icon img { width: 28.8px; height: 28.8px; }
+    #scr-upload-pending-row-actions-sheet .sheet-title-group {
+      flex: 1; min-width: 0; align-self: stretch;
+      display: flex; flex-direction: column; justify-content: center; gap: 8px;
+    }
+    #scr-upload-pending-row-actions-sheet .sheet-title {
+      font-family: "Hiragino Kaku Gothic ProN", sans-serif; font-weight: 600; font-size: 17px; color: var(--text);
+      margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #scr-upload-pending-row-actions-sheet .sheet-group { font-size: 13px; font-weight: 300; color: var(--text-weak); margin: 0; }
+    #scr-upload-pending-row-actions-sheet .sheet-close { width: 28px; height: 28px; flex: none; cursor: pointer; }
+
+    #scr-upload-pending-row-actions-sheet .sheet-actions { margin: 0 16px; background: #fff; border-radius: 12px; padding-left: 16px; }
+    #scr-upload-pending-row-actions-sheet .sheet-action-row {
+      display: flex; align-items: center; gap: 12px; height: 64px; cursor: pointer;
+    }
+    #scr-upload-pending-row-actions-sheet .sheet-action-row:not(:last-child) { border-bottom: .5px solid rgba(31,35,41,.15); }
+    #scr-upload-pending-row-actions-sheet .sheet-action-row img { width: 24px; height: 24px; }
+    #scr-upload-pending-row-actions-sheet .sheet-action-row span { font-family: "Hiragino Kaku Gothic ProN", sans-serif; font-weight: 300; font-size: 18px; color: var(--text); }
+
+    #scr-upload-pending-row-actions-sheet .sheet-delete {
+      margin: 0 16px; background: #fff; border-radius: 12px; height: 64px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Hiragino Kaku Gothic ProN", sans-serif; font-weight: 300; font-size: 18px; color: #bd3734; cursor: pointer;
+    }
+  </style>
+
+  <!-- the real upload-pending list underneath shows through — this fragment
+       is just the scrim + sheet overlay -->
+
+  <!-- row action bottom sheet overlay -->
+  <div class="scrim" data-tap="close:row-actions-sheet">
+    <div class="sheet">
+      <div class="sheet-header">
+        <div class="sheet-icon"><img src="../assets/mic-icon-teal.svg" alt=""></div>
+        <div class="sheet-title-group">
+          <p class="sheet-title">管理者権限の統一化と自動ログアウト挙動の確認</p>
+          <p class="sheet-group">グループ：UIUXデザイン</p>
+        </div>
+        <img class="sheet-close" data-tap="close:row-actions-sheet" src="../assets/close-x-icon-large.svg" alt="閉じる">
+      </div>
+
+      <div class="sheet-actions">
+        <div class="sheet-action-row" data-tap="go:upload-single">
+          <img src="../assets/upload-cloud-gray.svg" alt="">
+          <span>アップロード</span>
+        </div>
+        <div class="sheet-action-row" data-tap="open:edit-info-sheet">
+          <img src="../assets/edit-pencil-icon.svg" alt="">
+          <span>録音情報の変更</span>
+        </div>
+      </div>
+
+      <div class="sheet-delete" data-tap="delete:recording">削除</div>
+    </div>
+  </div>
+</section>

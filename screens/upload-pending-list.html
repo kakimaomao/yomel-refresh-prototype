@@ -1,0 +1,119 @@
+<section class="board" id="scr-upload-pending-list">
+  <style>
+    #scr-upload-pending-list { background: #f8f9fa; }
+    #scr-upload-pending-list .pw-content { position: absolute; left: 16px; top: 53.5px; width: 398px; }
+    #scr-upload-pending-list .pw-header { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+    #scr-upload-pending-list .pw-header .back-btn { width: 32px; height: 32px; cursor: pointer; display: block; }
+    #scr-upload-pending-list .pw-header-title { position: absolute; left: 50%; transform: translateX(-50%); font-size: 20px; font-weight: 600; color: var(--text); white-space: nowrap; }
+    #scr-upload-pending-list .pw-header-action { font-size: 18px; font-weight: 300; color: var(--text); cursor: pointer; }
+
+    #scr-upload-pending-list .rec-list { display: flex; flex-direction: column; gap: 12px; }
+    #scr-upload-pending-list .rec-card { background: #fff; border-radius: 12px; padding: 20px 16px; cursor: pointer; }
+    #scr-upload-pending-list .rec-title {
+      font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+      font-size: 17px; font-weight: 600; color: var(--text); line-height: 1.5; margin: 0 0 16px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    #scr-upload-pending-list .rec-meta { display: flex; align-items: center; gap: 8px; height: 20px; }
+    #scr-upload-pending-list .rec-meta-left { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-faint); font-weight: 300; min-width: 0; flex: 1; }
+    #scr-upload-pending-list .rec-meta-left .grp,
+    #scr-upload-pending-list .rec-meta-left .dur { display: flex; align-items: center; gap: 2px; }
+    #scr-upload-pending-list .rec-meta-left .dur { gap: 4px; }
+    #scr-upload-pending-list .rec-meta-left .grp { min-width: 0; flex: 0 1 auto; }
+    #scr-upload-pending-list .rec-meta-left .grp-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    #scr-upload-pending-list .rec-meta-left .sep,
+    #scr-upload-pending-list .rec-meta-left .dur,
+    #scr-upload-pending-list .rec-meta-left > span:not(.grp) { flex-shrink: 0; }
+    #scr-upload-pending-list .rec-meta-left .sep { width: 1px; height: 12px; background: var(--border); }
+    #scr-upload-pending-list .rec-meta-left img { display: block; flex-shrink: 0; }
+    #scr-upload-pending-list .rec-menu-btn { width: 20px; height: 20px; cursor: pointer; display: block; flex-shrink: 0; }
+
+    #scr-upload-pending-list .rec-error { display: flex; gap: 8px; align-items: flex-start; background: #FFF3E5; border-radius: 4px; padding: 8px; margin-top: 16px; box-sizing: border-box; }
+    #scr-upload-pending-list .rec-error > img { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; display: block; }
+    #scr-upload-pending-list .rec-error-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+    #scr-upload-pending-list .rec-error-title { margin: 0; font-family: "Hiragino Sans", sans-serif; font-weight: 600; font-size: 14px; color: var(--text); line-height: 1.5; }
+    #scr-upload-pending-list .rec-error-detail { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+    #scr-upload-pending-list .rec-error-detail > span { font-family: "Hiragino Sans", sans-serif; font-weight: 300; font-size: 14px; color: var(--text); line-height: 1.5; }
+    #scr-upload-pending-list .rec-error-detail > span.rec-error-bold { font-weight: 600; }
+    #scr-upload-pending-list .rec-error-link { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+    #scr-upload-pending-list .rec-error-link span { font-family: "Hiragino Sans", sans-serif; font-weight: 300; font-size: 14px; color: #3370FF; }
+    #scr-upload-pending-list .rec-error-link img { width: 16px; height: 16px; display: block; }
+    #scr-upload-pending-list .rec-error.rec-success { background: #E4FAE1; align-items: center; }
+    #scr-upload-pending-list .rec-error.rec-success > img.rec-error-close { width: 16px; height: 16px; flex-shrink: 0; margin-top: 0; cursor: pointer; }
+  </style>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="pw-content">
+    <div class="pw-header">
+      <img class="back-btn" data-tap="open:side-menu" src="../assets/icon-menu-hamburger.svg" width="32" height="32" alt="メニュー">
+      <p class="pw-header-title">アップロード待ち</p>
+      <p class="pw-header-action" data-tap="toggle:select-mode">選択</p>
+    </div>
+
+    <div class="rec-list">
+      <div class="rec-card" data-tap="toggle:row-player:rec-1">
+        <p class="rec-title">話者統合機能のUI改善とQAチーム連携</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-menu-btn" data-tap="open:row-menu:rec-1" src="../assets/row-menu-dots.svg" width="20" height="20" alt="メニュー">
+        </div>
+      </div>
+
+      <div class="rec-card" data-tap="toggle:row-player:rec-2">
+        <p class="rec-title">新入社員オンボーディングとデザインレビュー 新入社員オンボーディングとデザインレビュー</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-menu-btn" data-tap="open:row-menu:rec-2" src="../assets/row-menu-dots.svg" width="20" height="20" alt="メニュー">
+        </div>
+      </div>
+
+      <div class="rec-card" data-tap="toggle:row-player:rec-3">
+        <p class="rec-title">話者統合機能のUI改善とQAチーム連携</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-menu-btn" data-tap="open:row-menu:rec-3" src="../assets/row-menu-dots.svg" width="20" height="20" alt="メニュー">
+        </div>
+      </div>
+
+      <div class="rec-card" data-tap="toggle:row-player:rec-4">
+        <p class="rec-title">話者統合機能のUI改善とQAチーム連携</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-menu-btn" data-tap="open:row-menu:rec-4" src="../assets/row-menu-dots.svg" width="20" height="20" alt="メニュー">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

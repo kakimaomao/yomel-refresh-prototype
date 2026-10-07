@@ -1,0 +1,86 @@
+<section class="board" id="scr-login-space-confirm">
+  <style>
+    /* styles scoped under #scr-login-space-confirm — bespoke to this screen only. */
+    #scr-login-space-confirm .bg-wave{
+      position:absolute; top:-220px; left:calc(50% + 15.31px); width:1113.54px; height:390.13px;
+      transform:translateX(-50%) rotate(7.97deg); z-index:0; pointer-events:none;
+    }
+    #scr-login-space-confirm .btn{padding:20px 10px;}
+    #scr-login-space-confirm .bg-wave img{display:block; width:100%; height:100%;}
+    #scr-login-space-confirm .content{
+      position:absolute; left:0; top:187px; width:430px; padding:0 20px;
+      display:flex; flex-direction:column; gap:36px; z-index:1;
+    }
+    #scr-login-space-confirm .logo{width:54px; height:37px;}
+    #scr-login-space-confirm .logo img{display:block; width:100%; height:100%;}
+    #scr-login-space-confirm .heading{
+      font-size:24px; font-weight:600; line-height:1.4; color:var(--text); margin:0;
+    }
+    #scr-login-space-confirm .form{display:flex; flex-direction:column; gap:24px;}
+    #scr-login-space-confirm .field-group{display:flex; flex-direction:column; gap:16px;}
+    #scr-login-space-confirm .space-id-row{
+      display:flex; align-items:center; gap:4px; padding:8px 0; font-size:17px;
+    }
+    #scr-login-space-confirm .space-id-row .label{color:var(--text-weak); font-weight:300;}
+    #scr-login-space-confirm .space-id-row .value{color:var(--text); font-weight:600;}
+    #scr-login-space-confirm .consent{
+      margin:0; font-size:15px; line-height:1.4; color:var(--text-faint); font-weight:300;
+    }
+    #scr-login-space-confirm .consent .link{color:var(--primary); cursor:pointer;}
+    #scr-login-space-confirm .switch-space{
+      position:absolute; left:0; top:801px; width:430px;
+      display:flex; flex-direction:column; gap:12px; z-index:1;
+    }
+    #scr-login-space-confirm .switch-space-divider{
+      display:flex; align-items:center; gap:12px; padding:0 16px;
+    }
+    #scr-login-space-confirm .switch-space-divider .line{flex:1; height:1px; background:var(--border);}
+    #scr-login-space-confirm .switch-space-divider span{
+      color:var(--text-faint); font-size:13px; font-weight:300; white-space:nowrap;
+    }
+    #scr-login-space-confirm .switch-space-btn-wrap{padding:0 16px;}
+    #scr-login-space-confirm .switch-space-btn{
+      height:52px; display:flex; align-items:center; justify-content:center;
+      border:1px solid var(--border); border-radius:8px; font-size:17px;
+      font-weight:300; color:var(--text); cursor:pointer;
+    }
+  </style>
+
+  <div class="bg-wave"><img src="../assets/bg-wave.svg" alt=""></div>
+
+  <!-- status bar (always the same: 9:41, full signal/wifi/battery) -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="content">
+    <div class="logo"><img src="../assets/yomel-logo.svg" alt="Yomel"></div>
+    <h1 class="heading">Yomel にログイン</h1>
+    <div class="form">
+      <div class="field-group">
+        <div class="space-id-row">
+          <span class="label">スペースID：</span><span class="value">ernie</span>
+        </div>
+        <div class="btn btn-primary" data-tap="go:login-success">ログイン</div>
+      </div>
+      <p class="consent">
+        ログインすることにより、<span class="link" data-tap="open:terms">利用規約</span>と<span class="link" data-tap="open:privacy-policy">プライバシーポリシー</span>に同意したとみなされます
+      </p>
+    </div>
+  </div>
+
+  <div class="switch-space">
+    <div class="switch-space-divider">
+      <span class="line"></span>
+      <span>別のスペースを使う</span>
+      <span class="line"></span>
+    </div>
+    <div class="switch-space-btn-wrap">
+      <div class="switch-space-btn" data-tap="go:change-space-id">スペースIDを変更</div>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

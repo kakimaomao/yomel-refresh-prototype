@@ -1,0 +1,134 @@
+<section class="board" id="scr-upload-pending-select-mode">
+  <style>
+    #scr-upload-pending-select-mode { background: #f8f9fa; }
+    #scr-upload-pending-select-mode .pw-content { position: absolute; left: 16px; top: 53.5px; width: 398px; }
+    #scr-upload-pending-select-mode .pw-header { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+    #scr-upload-pending-select-mode .pw-header .back-btn { width: 32px; height: 32px; cursor: pointer; display: block; }
+    #scr-upload-pending-select-mode .pw-header-title { position: absolute; left: 50%; transform: translateX(-50%); font-size: 20px; font-weight: 600; color: var(--text); white-space: nowrap; }
+    #scr-upload-pending-select-mode .pw-header-action { font-size: 18px; font-weight: 300; color: var(--text); cursor: pointer; }
+
+    #scr-upload-pending-select-mode .select-subbar { display: flex; align-items: center; justify-content: space-between; font-size: 18px; font-weight: 300; margin-bottom: 20px; }
+    #scr-upload-pending-select-mode .select-count { color: var(--text-faint); }
+    #scr-upload-pending-select-mode .select-all { color: var(--text); cursor: pointer; }
+
+    #scr-upload-pending-select-mode .rec-list { display: flex; flex-direction: column; gap: 12px; padding-bottom: 113px; }
+    #scr-upload-pending-select-mode .rec-card { background: #fff; border-radius: 12px; padding: 20px 16px; }
+    #scr-upload-pending-select-mode .rec-title {
+      font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+      font-size: 17px; font-weight: 600; color: var(--text); line-height: 1.5; margin: 0 0 16px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    #scr-upload-pending-select-mode .rec-meta { display: flex; align-items: center; gap: 8px; height: 20px; }
+    #scr-upload-pending-select-mode .rec-meta-left { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-faint); font-weight: 300; min-width: 0; flex: 1; }
+    #scr-upload-pending-select-mode .rec-meta-left .grp,
+    #scr-upload-pending-select-mode .rec-meta-left .dur { display: flex; align-items: center; gap: 2px; }
+    #scr-upload-pending-select-mode .rec-meta-left .dur { gap: 4px; }
+    #scr-upload-pending-select-mode .rec-meta-left .grp { min-width: 0; flex: 0 1 auto; }
+    #scr-upload-pending-select-mode .rec-meta-left .grp-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    #scr-upload-pending-select-mode .rec-meta-left .sep,
+    #scr-upload-pending-select-mode .rec-meta-left .dur,
+    #scr-upload-pending-select-mode .rec-meta-left > span:not(.grp) { flex-shrink: 0; }
+    #scr-upload-pending-select-mode .rec-meta-left .sep { width: 1px; height: 12px; background: var(--border); }
+    #scr-upload-pending-select-mode .rec-meta-left img { display: block; flex-shrink: 0; }
+    #scr-upload-pending-select-mode .rec-checkbox { width: 24px; height: 24px; cursor: pointer; display: block; flex-shrink: 0; }
+
+    #scr-upload-pending-select-mode .bottom-bar {
+      position: absolute; left: 0; bottom: 0; width: 430px; height: 93px; background: #eff0f1;
+      display: flex; align-items: flex-start; justify-content: center; gap: 110px; padding-top: 14.5px; z-index: 40;
+    }
+    #scr-upload-pending-select-mode .bottom-bar .bb-btn { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; width: 28px; }
+    #scr-upload-pending-select-mode .bottom-bar img { width: 24px; height: 24px; display: block; }
+    #scr-upload-pending-select-mode .bottom-bar span { font-size: 12px; font-weight: 300; color: var(--text-weak); white-space: nowrap; }
+  </style>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="pw-content">
+    <div class="pw-header">
+      <img class="back-btn" data-tap="back" src="../assets/chevron-back.svg" width="32" height="32" alt="戻る">
+      <p class="pw-header-title">アップロード待ち</p>
+      <p class="pw-header-action" data-tap="toggle:select-mode-off">完成</p>
+    </div>
+
+    <div class="select-subbar">
+      <span class="select-count">3件選択中</span>
+      <span class="select-all" data-tap="toggle:select-all">すべて選択</span>
+    </div>
+
+    <div class="rec-list">
+      <div class="rec-card" data-tap="toggle:checkbox-rec-1">
+        <p class="rec-title">話者統合機能のUI改善とQAチーム連携</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-checkbox" data-tap="toggle:checkbox-rec-1" src="../assets/icon-checkbox-checked.svg" width="24" height="24" alt="選択中">
+        </div>
+      </div>
+
+      <div class="rec-card" data-tap="toggle:checkbox-rec-2">
+        <p class="rec-title">新入社員オンボーディングとデザインレビュー 新入社員オンボーディングとデザインレビュー</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-checkbox" data-tap="toggle:checkbox-rec-2" src="../assets/icon-checkbox-checked.svg" width="24" height="24" alt="選択中">
+        </div>
+      </div>
+
+      <div class="rec-card" data-tap="toggle:checkbox-rec-3">
+        <p class="rec-title">話者統合機能のUI改善とQAチーム連携</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-checkbox" data-tap="toggle:checkbox-rec-3" src="../assets/icon-checkbox-checked.svg" width="24" height="24" alt="選択中">
+        </div>
+      </div>
+
+      <div class="rec-card" data-tap="toggle:checkbox-rec-4">
+        <p class="rec-title">話者統合機能のUI改善とQAチーム連携</p>
+        <div class="rec-meta">
+          <div class="rec-meta-left">
+            <span class="grp"><img src="../assets/icon-workspace-building.svg" width="16" height="16" alt=""><span class="grp-label">UIUXデザイン</span></span>
+            <span class="sep"></span>
+            <span>2026/02/10</span>
+            <span class="sep"></span>
+            <span class="dur"><img src="../assets/audio-duration-icon.svg" width="12" height="12" alt="">29:15</span>
+          </div>
+          <img class="rec-checkbox" data-tap="toggle:checkbox-rec-4" src="../assets/icon-checkbox-unchecked.svg" width="24" height="24" alt="未選択">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="bb-btn" data-tap="delete:selected">
+      <img src="../assets/trash-icon-red.svg" alt="">
+      <span>削除</span>
+    </div>
+    <div class="bb-btn" data-tap="go:upload-selected">
+      <img src="../assets/upload-cloud-gray.svg" alt="">
+      <span>アップロード</span>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

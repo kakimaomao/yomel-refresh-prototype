@@ -1,0 +1,109 @@
+<section class="board" id="scr-license-list">
+  <style>
+    #scr-license-list{ background:#f8f9fa; }
+    #scr-license-list .content{
+      position:absolute; top:70px; left:0; right:0; bottom:21px;
+      overflow-y:auto; -webkit-overflow-scrolling:touch;
+    }
+    #scr-license-list .titlebar{
+      position:relative; display:flex; align-items:center; justify-content:center;
+      padding:20px 0; min-height:60px;
+    }
+    #scr-license-list .titlebar .back-btn{
+      position:absolute; left:16px; top:50%; transform:translateY(-50%);
+      width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+    }
+    #scr-license-list .titlebar .title{ font-size:20px; font-weight:600; color:var(--text); }
+    #scr-license-list .inner{ padding:20px 16px 32px; display:flex; flex-direction:column; align-items:center; gap:48px; }
+    #scr-license-list .app-icon{
+      width:72px; height:72px; border-radius:16px; background:#fff;
+      display:flex; align-items:center; justify-content:center;
+    }
+    #scr-license-list .app-icon img{ width:46px; height:31.5px; }
+    #scr-license-list .app-meta{ display:flex; flex-direction:column; align-items:center; gap:17px; text-align:center; }
+    #scr-license-list .app-name{ font-size:24px; font-weight:600; color:var(--text); }
+    #scr-license-list .app-version{ font-size:17px; font-weight:300; color:var(--text); }
+    #scr-license-list .app-powered{ font-size:14px; font-weight:300; color:var(--text-faint); }
+    #scr-license-list .section{ display:flex; flex-direction:column; gap:12px; width:100%; }
+    #scr-license-list .section-label{ font-size:18px; font-weight:600; color:var(--text-faint); padding:0 20px; text-align:left; }
+    #scr-license-list .card{ background:#fff; border-radius:12px; padding:2px 20px; display:flex; flex-direction:column; width:100%; }
+    #scr-license-list .pkg-row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      min-height:56px; padding:12px 0; border-bottom:.5px solid rgba(31,35,41,.15); cursor:pointer;
+    }
+    #scr-license-list .pkg-row:last-child{ border-bottom:none; }
+    #scr-license-list .pkg-row:active{ background:rgba(0,0,0,.03); }
+    #scr-license-list .pkg-row .name{ font-size:18px; font-weight:300; color:var(--text); }
+    #scr-license-list .pkg-row .meta{ display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    #scr-license-list .pkg-row .count{ font-size:17px; font-weight:300; color:var(--text-weak); }
+    #scr-license-list .pkg-row .chev{ width:20px; height:20px; display:flex; }
+  </style>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="content">
+    <div class="titlebar">
+      <div class="back-btn" data-tap="back"><img src="../assets/chevron-back.svg" width="32" height="32" alt="戻る"></div>
+      <div class="title">ライセンス</div>
+    </div>
+
+    <div class="inner">
+      <div class="app-icon"><img src="../assets/yomel-logo.svg" alt="YOMEL"></div>
+
+      <div class="app-meta">
+        <div class="app-name">自動議事録AI YOMEL</div>
+        <div class="app-version">Version: 1.5.0 (87)</div>
+        <div class="app-powered">Powered by Flutter</div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">ライセンス</div>
+        <div class="card">
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">_fe_analyzer_shared</span>
+            <span class="meta"><span class="count">1件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">_flutterfire_internals</span>
+            <span class="meta"><span class="count">1件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">abseil-cpp</span>
+            <span class="meta"><span class="count">2件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">accessibility</span>
+            <span class="meta"><span class="count">16件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">accessibility_tools</span>
+            <span class="meta"><span class="count">1件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">alchemist</span>
+            <span class="meta"><span class="count">1件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">analysis_server_plugin</span>
+            <span class="meta"><span class="count">1件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">analyzer</span>
+            <span class="meta"><span class="count">1件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+          <div class="pkg-row" data-tap="open:license-detail">
+            <span class="name">_fe_analyzer_shared</span>
+            <span class="meta"><span class="count">1件</span><img class="chev" src="../assets/chevron-right-disclosure.svg" alt=""></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

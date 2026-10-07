@@ -1,0 +1,114 @@
+[
+  {
+    "slug": "recording-active",
+    "figmaNodeId": "5270:78518",
+    "title": "録音中（オンライン・未保存タイトル）",
+    "fragmentFile": "screens/recording-active.html",
+    "description": "Live online recording screen before the title has been set (placeholder 'タイトルを入力' shown in gray). Transcript tab is selected and shows the live-streaming transcript bubbles. Only a small circular pause button plus '録音停止' are shown (no resume button) because recording is actively in progress.",
+    "tapTargets": [
+      {"dataTap": "open:workspace-picker", "label": "UIUXデザイン workspace chip", "guessedTarget": "opens a workspace/project picker or breadcrumb menu"},
+      {"dataTap": "switch-tab:transcript", "label": "書き起こし tab (selected)", "guessedTarget": "stays on this screen (already active)"},
+      {"dataTap": "switch-tab:loginfo", "label": "ログ情報 tab", "guessedTarget": "go to recording-paused-loginfo-style screen, but in an 'active recording' log-info variant not in this node set"},
+      {"dataTap": "toggle:pause-recording", "label": "small green pause icon button", "guessedTarget": "pauses recording -> goes to recording-paused-transcript (5270:79643)"},
+      {"dataTap": "go:stop-recording", "label": "録音停止 button", "guessedTarget": "opens a stop-recording confirmation, then likely to the log/detail screen"}
+    ],
+    "notes": "Part of the 5-node contiguous row (78518/79643/79859/80079/80318). This is the 'currently recording, online' state: title still shows placeholder color #bbbfc4, and the action bar has no 再開(resume) button, only a pause icon — distinguishing it from the other 4 nodes which are all already-paused states of the same screen (with a real title 'ミニマムプロジェクト' and a 再開 button). Did not find a scroll-annotation near this node."
+  },
+  {
+    "slug": "recording-paused-transcript",
+    "figmaNodeId": "5270:79643",
+    "title": "録音中（オンライン・一時停止・書き起こしタブ）",
+    "fragmentFile": "screens/recording-paused-transcript.html",
+    "description": "Same recording screen as recording-active but in the paused state: a real project title 'ミニマムプロジェクト' with an edit-pencil icon is now shown, and the action bar shows a green '再開' (resume) button plus '録音停止'. Transcript tab content is identical to recording-active.",
+    "tapTargets": [
+      {"dataTap": "open:edit-title", "label": "title text + pencil icon", "guessedTarget": "opens an inline/sheet title editor"},
+      {"dataTap": "open:workspace-picker", "label": "UIUXデザイン workspace chip", "guessedTarget": "opens a workspace/project picker"},
+      {"dataTap": "switch-tab:transcript", "label": "書き起こし tab (selected)", "guessedTarget": "stays on this screen"},
+      {"dataTap": "switch-tab:loginfo", "label": "ログ情報 tab", "guessedTarget": "goes to recording-paused-loginfo (5270:80079)"},
+      {"dataTap": "go:resume-recording", "label": "再開 button", "guessedTarget": "resumes recording -> back to recording-active-style state"},
+      {"dataTap": "go:stop-recording", "label": "録音停止 button", "guessedTarget": "opens a stop-recording confirmation"}
+    ],
+    "notes": "Part of the 5-node contiguous row. This is the baseline 'paused' state; recording-paused-transcript-scrolled (5270:79859) is the same screen scrolled up (header collapsed). No explicit Figma annotation text was visible near this specific node, but its sibling 79859 is clearly its scrolled variant by content diff."
+  },
+  {
+    "slug": "recording-paused-transcript-scrolled",
+    "figmaNodeId": "5270:79859",
+    "title": "録音中（オンライン・一時停止・書き起こしタブ・スクロール時）",
+    "fragmentFile": "screens/recording-paused-transcript-scrolled.html",
+    "description": "Scrolled-up state of recording-paused-transcript: the title/workspace header row is gone, leaving only the tab bar pinned at the top, and a round gray 'scroll to bottom' FAB (chevron-down) appears floating over the bottom-right of the transcript list.",
+    "tapTargets": [
+      {"dataTap": "switch-tab:transcript", "label": "書き起こし tab (selected)", "guessedTarget": "stays on this screen"},
+      {"dataTap": "switch-tab:loginfo", "label": "ログ情報 tab", "guessedTarget": "goes to recording-paused-loginfo-scrolled (5270:80318)"},
+      {"dataTap": "scroll-to-bottom", "label": "floating round down-chevron button", "guessedTarget": "scrolls the transcript list back to the latest message"},
+      {"dataTap": "go:resume-recording", "label": "再開 button", "guessedTarget": "resumes recording"},
+      {"dataTap": "go:stop-recording", "label": "録音停止 button", "guessedTarget": "opens a stop-recording confirmation"}
+    ],
+    "notes": "This is the collapsed-header / scrolled-up variant of recording-paused-transcript (5270:79643) — matches the kind of 上にスクロールしたとき (when scrolled up) relationship mentioned in the brief, inferred from content diff (identical transcript + paused action bar, but header row removed and a scroll-to-bottom FAB added) rather than an explicit annotation string actually found on the canvas via dev-mode context."
+  },
+  {
+    "slug": "recording-paused-loginfo",
+    "figmaNodeId": "5270:80079",
+    "title": "録音中（オンライン・一時停止・ログ情報タブ）",
+    "fragmentFile": "screens/recording-paused-loginfo.html",
+    "description": "Same paused recording screen, but with 'ログ情報' (log info) tab selected: shows 作成者 (creator avatar+name), 日時 (datetime), タグ (tag chips + edit icon), ステータス (status text + edit icon). Action bar is identical to recording-paused-transcript (再開/録音停止).",
+    "tapTargets": [
+      {"dataTap": "open:edit-title", "label": "title text + pencil icon", "guessedTarget": "opens title editor"},
+      {"dataTap": "open:workspace-picker", "label": "UIUXデザイン workspace chip", "guessedTarget": "opens workspace/project picker"},
+      {"dataTap": "switch-tab:transcript", "label": "書き起こし tab", "guessedTarget": "goes to recording-paused-transcript (5270:79643)"},
+      {"dataTap": "switch-tab:loginfo", "label": "ログ情報 tab (selected)", "guessedTarget": "stays on this screen"},
+      {"dataTap": "open:creator-profile", "label": "creator avatar + name row", "guessedTarget": "low-confidence guess — may not be tappable, included defensively since avatar rows are usually tappable"},
+      {"dataTap": "open:edit-tags", "label": "pencil icon next to tag chips", "guessedTarget": "opens a tag editor/picker"},
+      {"dataTap": "open:edit-status", "label": "status text + pencil icon", "guessedTarget": "opens a status picker (e.g. 商談中/完了 etc.)"},
+      {"dataTap": "go:resume-recording", "label": "再開 button", "guessedTarget": "resumes recording"},
+      {"dataTap": "go:stop-recording", "label": "録音停止 button", "guessedTarget": "opens a stop-recording confirmation"}
+    ],
+    "notes": "Part of the 5-node contiguous row. recording-paused-loginfo-scrolled (5270:80318) is the scrolled/collapsed-header variant of this same screen."
+  },
+  {
+    "slug": "recording-paused-loginfo-scrolled",
+    "figmaNodeId": "5270:80318",
+    "title": "録音中（オンライン・一時停止・ログ情報タブ・スクロール時）",
+    "fragmentFile": "screens/recording-paused-loginfo-scrolled.html",
+    "description": "Collapsed-header variant of recording-paused-loginfo: title/workspace row removed, only the tab bar remains pinned under the status bar; the 作成者/日時/タグ/ステータス content and bottom action bar are unchanged.",
+    "tapTargets": [
+      {"dataTap": "switch-tab:transcript", "label": "書き起こし tab", "guessedTarget": "goes to recording-paused-transcript-scrolled (5270:79859)"},
+      {"dataTap": "switch-tab:loginfo", "label": "ログ情報 tab (selected)", "guessedTarget": "stays on this screen"},
+      {"dataTap": "open:creator-profile", "label": "creator avatar + name row", "guessedTarget": "low-confidence guess, same as recording-paused-loginfo"},
+      {"dataTap": "open:edit-tags", "label": "pencil icon next to tag chips", "guessedTarget": "opens a tag editor/picker"},
+      {"dataTap": "open:edit-status", "label": "status text + pencil icon", "guessedTarget": "opens a status picker"},
+      {"dataTap": "go:resume-recording", "label": "再開 button", "guessedTarget": "resumes recording"},
+      {"dataTap": "go:stop-recording", "label": "録音停止 button", "guessedTarget": "opens a stop-recording confirmation"}
+    ],
+    "notes": "This is the scrolled/collapsed-header variant of recording-paused-loginfo (5270:80079), inferred from content diff rather than a literal annotation string retrieved via dev-mode context. The ログ情報 content here isn't actually tall enough to need scrolling in this prototype — kept the collapsed-header treatment anyway for visual consistency with its sibling, since that's what the Figma frame shows."
+  },
+  {
+    "slug": "recording-offline-active",
+    "figmaNodeId": "5270:78731",
+    "title": "録音中（オフラインモード）",
+    "fragmentFile": "screens/recording-offline-active.html",
+    "description": "Offline-mode recording variant: no live transcript is produced, so instead of 書き起こし/ログ情報 tabs there's a '録音'(recording, selected)/ログ情報 tab pair, and the main content area shows a static waveform visualization, the caption 'オフラインモードで録音します' (recording in offline mode), and a large 00:24 timer. Actively recording: action bar shows a large light-green pause icon button plus 録音停止 (no resume button).",
+    "tapTargets": [
+      {"dataTap": "open:workspace-picker", "label": "UIUXデザイン workspace chip", "guessedTarget": "opens workspace/project picker"},
+      {"dataTap": "switch-tab:recording", "label": "録音 tab (selected)", "guessedTarget": "stays on this screen"},
+      {"dataTap": "switch-tab:loginfo", "label": "ログ情報 tab", "guessedTarget": "likely an offline-mode log-info screen, not included in this node set"},
+      {"dataTap": "toggle:pause-recording", "label": "large green pause icon button", "guessedTarget": "pauses recording -> recording-offline-paused (5270:79185)"},
+      {"dataTap": "go:stop-recording", "label": "録音停止 button", "guessedTarget": "opens a stop-recording confirmation"}
+    ],
+    "notes": "This is the separate 'offline mode' pair mentioned in the brief, confirmed by the caption text 'オフラインモードで録音します' and the waveform-only content area replacing the live transcript. Title still shows the untitled placeholder, matching the 'actively recording' state seen in recording-active (5270:78518)."
+  },
+  {
+    "slug": "recording-offline-paused",
+    "figmaNodeId": "5270:79185",
+    "title": "録音中（オフラインモード・一時停止）",
+    "fragmentFile": "screens/recording-offline-paused.html",
+    "description": "Paused state of the offline-mode recording screen: identical waveform/caption/timer content as recording-offline-active, but the action bar now shows a green '再開' (resume, with mic icon) button plus 録音停止.",
+    "tapTargets": [
+      {"dataTap": "open:workspace-picker", "label": "UIUXデザイン workspace chip", "guessedTarget": "opens workspace/project picker"},
+      {"dataTap": "switch-tab:recording", "label": "録音 tab (selected)", "guessedTarget": "stays on this screen"},
+      {"dataTap": "switch-tab:loginfo", "label": "ログ情報 tab", "guessedTarget": "likely an offline-mode log-info screen, not included in this node set"},
+      {"dataTap": "go:resume-recording", "label": "再開 button", "guessedTarget": "resumes recording -> recording-offline-active"},
+      {"dataTap": "go:stop-recording", "label": "録音停止 button", "guessedTarget": "opens a stop-recording confirmation"}
+    ],
+    "notes": "Pair with recording-offline-active (5270:78731) forming the offline-mode active/paused pair, mirroring the online active/paused relationship between recording-active and recording-paused-transcript. Title stays as untitled placeholder in both offline states (unlike the online pair, where the paused state picked up a real title) — worth flagging to central assembly as a possible inconsistency, or it may simply mean offline recordings here just haven't been titled yet in this particular mock data."
+  }
+]

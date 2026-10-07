@@ -1,0 +1,72 @@
+[
+  {
+    "slug": "login-space-id-empty",
+    "figmaNodeId": "5270:80580",
+    "title": "Yomelにログイン（スペースID未入力）",
+    "fragmentFile": "screens/login-space-id-empty.html",
+    "description": "Entry point of the login flow: space-ID text field is empty (placeholder shown), the 次へ button is disabled, no keyboard. First screen of a 5-step space-ID login sequence.",
+    "tapTargets": [
+      {"dataTap": "focus:space-id-input", "label": "スペースID input field", "guessedTarget": "focuses the field and brings up the keyboard — goes to login-space-id-keyboard"},
+      {"dataTap": "go:verify-space-id", "label": "次へ button (disabled)", "guessedTarget": "disabled in this state; no-op until the field has text"},
+      {"dataTap": "open:space-id-info", "label": "「スペースIDとは」link", "guessedTarget": "probably opens a help/info sheet or external doc explaining what a space ID is"}
+    ],
+    "notes": "Sibling of login-space-id-keyboard (same empty state, keyboard shown) — state-variant pair, kept as separate fragments per instructions. Background has the same decorative green wave (bg-wave.svg) and yomel-logo.svg reused from existing assets."
+  },
+  {
+    "slug": "login-space-id-keyboard",
+    "figmaNodeId": "5270:80616",
+    "title": "Yomelにログイン（キーボード表示・未入力）",
+    "fragmentFile": "screens/login-space-id-keyboard.html",
+    "description": "Same empty-field state as login-space-id-empty, but with the field focused and the iOS system keyboard open. State-variant of the first screen, not a distinct step.",
+    "tapTargets": [
+      {"dataTap": "focus:space-id-input", "label": "スペースID input field", "guessedTarget": "already focused; tapping again is a no-op"},
+      {"dataTap": "go:verify-space-id", "label": "次へ button (disabled)", "guessedTarget": "disabled; no-op until text is entered"},
+      {"dataTap": "open:space-id-info", "label": "「スペースIDとは」link", "guessedTarget": "same as login-space-id-empty"},
+      {"dataTap": "dismiss-keyboard", "label": "keyboard 'return' key", "guessedTarget": "dismisses keyboard, likely returns to login-space-id-empty visual state"}
+    ],
+    "notes": "The on-screen QWERTY keyboard is reproduced as simplified real HTML/CSS (not a screenshot), since the Figma dev-mode code for the keyboard is an extremely verbose per-key absolute-positioned layout (26+ nodes) that is pure iOS system chrome, not app UI — rebuilding it 1:1 would not add value for a click-through prototype per the brief's quality bar ('don't burn time pixel-chasing', priority on real tap targets over visual polish). Individual letter keys have no data-tap (not meaningful navigation); only the 'return' key does. The keyboard's own bottom bar visually covers the generic .home-indicator snippet (it is still included per the output contract, just underneath, z-index 60 keyboard on top)."
+  },
+  {
+    "slug": "login-space-id-filled",
+    "figmaNodeId": "5270:80653",
+    "title": "Yomelにログイン（スペースID入力済み）",
+    "fragmentFile": "screens/login-space-id-filled.html",
+    "description": "Space-ID field now contains text ('ernie') with a clear (x) button, 次へ button is enabled (green), keyboard still open. Third step in the sequence: user has typed a space ID.",
+    "tapTargets": [
+      {"dataTap": "focus:space-id-input", "label": "スペースID input field", "guessedTarget": "keeps focus / lets user keep editing"},
+      {"dataTap": "clear:space-id-input", "label": "clear (x) icon inside field", "guessedTarget": "clears the field back to the empty state (login-space-id-empty / -keyboard)"},
+      {"dataTap": "go:verify-space-id", "label": "次へ button (enabled)", "guessedTarget": "submits the space ID — leads to either login-space-confirm (valid) or login-space-id-error (invalid)"},
+      {"dataTap": "open:space-id-info", "label": "「スペースIDとは」link", "guessedTarget": "same as other space-ID screens"},
+      {"dataTap": "dismiss-keyboard", "label": "keyboard 'return' key", "guessedTarget": "same as login-space-id-keyboard, likely also triggers 次へ since return often submits"}
+    ],
+    "notes": "New asset downloaded: assets/input-clear-icon.svg (the x-in-circle clear button, hash 56ac9b8a...). Keyboard built the same simplified way as login-space-id-keyboard (see its notes) since it's visually identical chrome."
+  },
+  {
+    "slug": "login-space-id-error",
+    "figmaNodeId": "5270:80690",
+    "title": "Yomelにログイン（スペースID存在しないエラー）",
+    "fragmentFile": "screens/login-space-id-error.html",
+    "description": "Same filled field ('ernie') and enabled 次へ button as login-space-id-filled, but no keyboard and a floating black toast reading 「スペースIDが存在しません」(this space ID does not exist). This is the failure-path result of submitting login-space-id-filled.",
+    "tapTargets": [
+      {"dataTap": "focus:space-id-input", "label": "スペースID input field", "guessedTarget": "re-focuses to edit/retry — would likely bring the keyboard back"},
+      {"dataTap": "clear:space-id-input", "label": "clear (x) icon inside field", "guessedTarget": "clears the field, same as login-space-id-filled"},
+      {"dataTap": "go:verify-space-id", "label": "次へ button (enabled)", "guessedTarget": "retries verification with the current (or edited) space ID"},
+      {"dataTap": "open:space-id-info", "label": "「スペースIDとは」link", "guessedTarget": "same as other space-ID screens"}
+    ],
+    "notes": "AMBIGUITY WORTH FLAGGING: this error screen shows the exact same input value 'ernie' that login-space-confirm later treats as a *valid, confirmed* space ID leading straight to login. That is logically inconsistent (same ID shown as both nonexistent and valid) — most likely the Figma mockup just reused the 'ernie' placeholder value across states without updating it for the error variant, rather than this being an intentional product detail. Didn't invent a different error value since the brief says not to invent content; flagging instead. New asset downloaded: assets/toast-error-icon.svg (white x-in-circle icon inside the toast, hash d1ec63e0...)."
+  },
+  {
+    "slug": "login-space-confirm",
+    "figmaNodeId": "5270:80732",
+    "title": "Yomelにログイン（スペース確認・ログイン実行）",
+    "fragmentFile": "screens/login-space-confirm.html",
+    "description": "Final step of the space-ID login flow: the space ID is shown read-only as 'スペースID： ernie' (no longer an editable field), with a green ログイン (Login) button, terms/privacy consent text, and a secondary 'スペースIDを変更' (change space ID) option below a '別のスペースを使う' divider. This is reached after a *valid* space ID is confirmed (contrast with login-space-id-error, see its notes).",
+    "tapTargets": [
+      {"dataTap": "go:login-success", "label": "ログイン (Login) button", "guessedTarget": "performs the actual login — probably goes to a home/loading screen (not in this group's assigned nodes)"},
+      {"dataTap": "open:terms", "label": "「利用規約」(Terms of Service) link in consent text", "guessedTarget": "opens Terms of Service, likely a web view or sheet"},
+      {"dataTap": "open:privacy-policy", "label": "「プライバシーポリシー」(Privacy Policy) link in consent text", "guessedTarget": "opens Privacy Policy, likely a web view or sheet"},
+      {"dataTap": "go:change-space-id", "label": "スペースIDを変更 (change space ID) button", "guessedTarget": "goes back to the space-ID entry step — likely login-space-id-empty"}
+    ],
+    "notes": "Structurally different from the other 4 nodes in this group: no input field (static label instead), different primary button label (ログイン vs 次へ), and an extra secondary action block ('別のスペースを使う' + change-space-ID button) further down the screen. This is clearly a distinct step (confirm-and-login), not a state-variant of the space-ID entry screen."
+  }
+]

@@ -1,0 +1,93 @@
+<section class="board" id="scr-metadata-status-picker">
+  <style>
+    #scr-metadata-status-picker{ background:transparent; }
+
+    /* ---- modal overlay ---- */
+    #scr-metadata-status-picker .overlay{
+      position:absolute; inset:0; background:rgba(0,0,0,.5); z-index:60;
+    }
+    #scr-metadata-status-picker .sheet{
+      position:absolute; left:0; bottom:0; width:430px; height:758px;
+      background:#fff; border-radius:8px 8px 0 0; z-index:61;
+      display:flex; flex-direction:column; overflow-y:auto;
+    }
+    #scr-metadata-status-picker .sheet-header{
+      position:relative; display:flex; align-items:center; justify-content:space-between;
+      padding:20px; flex-shrink:0;
+    }
+    #scr-metadata-status-picker .sheet-header img{ width:20px; height:20px; display:block; cursor:pointer; }
+    #scr-metadata-status-picker .sheet-title{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      font-size:18px; font-weight:600; color:var(--text); white-space:nowrap;
+    }
+    #scr-metadata-status-picker .sheet-apply{ font-size:18px; font-weight:300; color:var(--primary); }
+    #scr-metadata-status-picker .sheet-body{ padding:8px 16px 48px; display:flex; flex-direction:column; gap:12px; }
+    #scr-metadata-status-picker .sheet-search{
+      background:var(--bg-weak); border-radius:8px; height:40px;
+      display:flex; align-items:center; gap:8px; padding:0 8px;
+    }
+    #scr-metadata-status-picker .sheet-search img{ width:18px; height:18px; display:block; }
+    #scr-metadata-status-picker .sheet-search span{ font-size:17px; font-weight:300; color:var(--placeholder); }
+    #scr-metadata-status-picker .sheet-list{ display:flex; flex-direction:column; }
+    #scr-metadata-status-picker .sheet-list .item{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:8px;
+      min-height:60px; padding:20px 0; border-bottom:.5px solid var(--border);
+    }
+    #scr-metadata-status-picker .sheet-list .item.no-border{ border-bottom:none; }
+    #scr-metadata-status-picker .sheet-list .item span{ font-size:17px; font-weight:300; color:var(--text); line-height:1.5; padding-top:2px; flex:1; min-width:0; }
+    #scr-metadata-status-picker .sheet-list .item img.check{ width:24px; height:24px; display:block; flex-shrink:0; margin-top:2px; }
+  </style>
+
+  <!-- the real screen underneath (e.g. 情報を入力) shows through — this
+       fragment is just the scrim + sheet overlay -->
+
+  <!-- status picker bottom sheet -->
+  <div class="overlay" data-tap="close:status-picker">
+    <div class="sheet">
+      <div class="sheet-header">
+        <img src="../assets/icon-close.svg" alt="close" data-tap="close:status-picker">
+        <span class="sheet-title">ステータス変更</span>
+        <span class="sheet-apply" data-tap="apply:status-selection">適用</span>
+      </div>
+      <div class="sheet-body">
+        <div class="sheet-search" data-tap="focus:status-search">
+          <img src="../assets/icon-search.svg" alt="">
+          <span>検索</span>
+        </div>
+        <div class="sheet-list">
+          <div class="item" data-tap="select:status-nego">
+            <span>商談中</span>
+            <img class="check" src="../assets/icon-check-selected.svg" alt="selected">
+          </div>
+          <div class="item" data-tap="select:status-next-action-extracted">
+            <span>ネクストアクション抽出済み</span>
+          </div>
+          <div class="item" data-tap="select:status-unconfirmed">
+            <span>未確認</span>
+          </div>
+          <div class="item" data-tap="select:status-next-action-extracted-2">
+            <span>ネクストアクション抽出済み</span>
+          </div>
+          <div class="item" data-tap="select:status-stage-1">
+            <span>1.初期接点/ヘルススコアgood支援</span>
+          </div>
+          <div class="item" data-tap="select:status-stage-2">
+            <span>2.DX部門との関係構築</span>
+          </div>
+          <div class="item" data-tap="select:status-stage-3">
+            <span>3.ユーザー拡大支援</span>
+          </div>
+          <div class="item" data-tap="select:status-stage-4">
+            <span>4.データ活用の価値提案</span>
+          </div>
+          <div class="item" data-tap="select:status-cancelled">
+            <span>解約</span>
+          </div>
+          <div class="item no-border" data-tap="select:status-private-mode">
+            <span>プライベートモード</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+[
+  {
+    "slug": "metadata-edit",
+    "figmaNodeId": "5270:81214",
+    "title": "情報を入力",
+    "fragmentFile": "screens/metadata-edit.html",
+    "description": "Base metadata-editing screen for a recording/log: a header hamburger/menu icon (QA pass 2025-10: found missing from the original build, now added) + title + memo text fields under 'ログ情報', a 'グループ' (save-destination group) row under '保存先', and 'タグ'/'ステータス' rows under 'ほか'. Primary 保存 button at the bottom.",
+    "tapTargets": [
+      {"dataTap": "open:side-menu", "label": "header hamburger/menu icon (32x32, top-left of title row)", "guessedTarget": "opens the app's side drawer — same target used elsewhere in the prototype. QA fix: this icon was entirely missing from the original build; re-verified against fresh Figma (node 5284:155098, asset icon-menu-hamburger.svg, three horizontal bars) and added."},
+      {"dataTap": "focus:title-field", "label": "タイトルを入力 field", "guessedTarget": "focuses inline title text input, no navigation"},
+      {"dataTap": "focus:memo-field", "label": "メモ field", "guessedTarget": "focuses inline memo textarea, no navigation"},
+      {"dataTap": "open:group-picker", "label": "グループ row (UIUXデザイン)", "guessedTarget": "opens metadata-group-picker bottom sheet (5270:81585)"},
+      {"dataTap": "open:tag-picker", "label": "タグ row (chips + +2)", "guessedTarget": "opens metadata-tag-picker-2 or -4 bottom sheet depending on current selection (5270:82476 / 5270:82938)"},
+      {"dataTap": "open:status-picker", "label": "ステータス row (商談中)", "guessedTarget": "opens metadata-status-picker bottom sheet (5270:82020)"},
+      {"dataTap": "save:metadata", "label": "保存 primary button", "guessedTarget": "commits metadata and likely returns to the recording detail/list screen"}
+    ],
+    "notes": "This is the shared base screen that nodes 5270:81585, 5270:82020, 5270:82476 and 5270:82938 all overlay a bottom sheet on top of. Those 4 siblings reproduce this same base (dimmed, non-interactive) behind their respective sheet, per the brief's instruction not to merge node ids myself. The group value shown is 'UIUXデザイン' and status is '商談中' in every sibling, i.e. none of the sheets' in-progress selections have been 'applied' back to this base screen's display in the source file."
+  },
+  {
+    "slug": "metadata-group-picker",
+    "figmaNodeId": "5270:81585",
+    "title": "他のグループへ移動",
+    "fragmentFile": "screens/metadata-group-picker.html",
+    "description": "Bottom sheet opened from the metadata-edit screen's グループ row. Lets the user move the recording to a different group/space: a search field, a single-select list of groups ('UIUXデザイン', 'プロダクトデザイン開発推進チーム統括本部' — currently checked), and a 'プライベートモード' (private mode) option at the bottom with no separator, visually distinct (blue lock icon) from the green building icons used for real groups.",
+    "tapTargets": [
+      {"dataTap": "close:group-picker", "label": "X close icon / tapping the dimmed overlay", "guessedTarget": "dismisses sheet, returns to metadata-edit with no change"},
+      {"dataTap": "focus:group-search", "label": "検索 search field", "guessedTarget": "focuses search input to filter the group list, no real filtering wired"},
+      {"dataTap": "select:group-uiux-design", "label": "UIUXデザイン row", "guessedTarget": "selects this group (would move the green checkmark here)"},
+      {"dataTap": "select:group-product-design-dept", "label": "プロダクトデザイン開発推進チーム統括本部 row (currently checked)", "guessedTarget": "selects this group; currently the checked/active one"},
+      {"dataTap": "select:group-private-mode", "label": "プライベートモード row", "guessedTarget": "switches the recording to private mode instead of a shared group"},
+      {"dataTap": "apply:group-selection", "label": "適用 (apply) text button", "guessedTarget": "confirms the selected group, closes sheet, updates the グループ row value on metadata-edit"}
+    ],
+    "notes": "State-variant of metadata-edit (5270:81214) with this sheet overlaid, per brief's guidance not to merge sibling node ids myself. Oddity: the base screen behind the sheet still shows 'UIUXデザイン' as the saved group, but inside the sheet the *second* item (プロダクトデザイン開発推進チーム統括本部) has the checkmark, not the first (UIUXデザイン) — i.e. the sheet's selection state doesn't match the base screen's displayed value. Flagged as-is from the Figma source, not something I introduced."
+  },
+  {
+    "slug": "metadata-status-picker",
+    "figmaNodeId": "5270:82020",
+    "title": "ステータス変更",
+    "fragmentFile": "screens/metadata-status-picker.html",
+    "description": "Bottom sheet opened from the metadata-edit screen's ステータス row. Single-select list of CRM/sales-call style statuses: 商談中 (in negotiation, currently checked), ネクストアクション抽出済み, 未確認, numbered pipeline stages (1.初期接点/ヘルススコアgood支援 through 4.データ活用の価値提案), 解約 (churned), and プライベートモード at the end.",
+    "tapTargets": [
+      {"dataTap": "close:status-picker", "label": "X close icon / overlay tap", "guessedTarget": "dismisses sheet, no change"},
+      {"dataTap": "focus:status-search", "label": "検索 search field", "guessedTarget": "filters the status list, not wired"},
+      {"dataTap": "select:status-nego", "label": "商談中 row (checked)", "guessedTarget": "currently selected status"},
+      {"dataTap": "select:status-next-action-extracted", "label": "ネクストアクション抽出済み row (1st occurrence)", "guessedTarget": "selects this status"},
+      {"dataTap": "select:status-unconfirmed", "label": "未確認 row", "guessedTarget": "selects this status"},
+      {"dataTap": "select:status-next-action-extracted-2", "label": "ネクストアクション抽出済み row (2nd, duplicate occurrence)", "guessedTarget": "selects this status — see notes on duplication"},
+      {"dataTap": "select:status-stage-1", "label": "1.初期接点/ヘルススコアgood支援 row", "guessedTarget": "selects this pipeline-stage status"},
+      {"dataTap": "select:status-stage-2", "label": "2.DX部門との関係構築 row", "guessedTarget": "selects this pipeline-stage status"},
+      {"dataTap": "select:status-stage-3", "label": "3.ユーザー拡大支援 row", "guessedTarget": "selects this pipeline-stage status"},
+      {"dataTap": "select:status-stage-4", "label": "4.データ活用の価値提案 row", "guessedTarget": "selects this pipeline-stage status"},
+      {"dataTap": "select:status-cancelled", "label": "解約 row", "guessedTarget": "marks the deal/recording as churned"},
+      {"dataTap": "select:status-private-mode", "label": "プライベートモード row (last, no divider)", "guessedTarget": "same private-mode option that also appears at the bottom of the group picker list"},
+      {"dataTap": "apply:status-selection", "label": "適用 (apply) text button", "guessedTarget": "confirms selected status, closes sheet, updates ステータス row value on metadata-edit"}
+    ],
+    "notes": "State-variant of metadata-edit (5270:81214) with this sheet overlaid. Source inconsistency: 'ネクストアクション抽出済み' appears twice in the Figma list (nodes 5270:82419 and 5270:82425) with identical label text — reproduced verbatim as two separate rows since the brief says not to invent/remove content, flagged here as likely a Figma duplication mistake rather than two distinct statuses. Also odd that 'プライベートモード' (private mode) shows up as a selectable item inside a 'status' list, identical to its appearance in the group picker sheet — kept as-is from source."
+  },
+  {
+    "slug": "metadata-tag-picker-2",
+    "figmaNodeId": "5270:82476",
+    "title": "タグ編集",
+    "fragmentFile": "screens/metadata-tag-picker-2.html",
+    "description": "Bottom sheet opened from the metadata-edit screen's タグ row, for multi-selecting tags. This is state A of a 2-state pair with 5270:82938 (metadata-tag-picker-4): here exactly 2 tags are selected (オンライン相談会, 社内会議), shown as removable chips at the top and as checked rows (filled green circle + check) in the list below; 4 more tags are available unchecked (未確認, ネクストアクション抽出済み, 社外会議, 解約).",
+    "tapTargets": [
+      {"dataTap": "close:tag-picker", "label": "X close icon / overlay tap", "guessedTarget": "dismisses sheet, no change"},
+      {"dataTap": "remove:tag-online-consultation", "label": "x on 'オンライン相談会' chip", "guessedTarget": "deselects this tag, removes its chip and unchecks it below"},
+      {"dataTap": "remove:tag-internal-meeting", "label": "x on '社内会議' chip", "guessedTarget": "deselects this tag"},
+      {"dataTap": "toggle:tag-online-consultation", "label": "オンライン相談会 checkbox row (checked)", "guessedTarget": "toggles this tag off"},
+      {"dataTap": "toggle:tag-internal-meeting", "label": "社内会議 checkbox row (checked)", "guessedTarget": "toggles this tag off"},
+      {"dataTap": "toggle:tag-unconfirmed", "label": "未確認 checkbox row (unchecked)", "guessedTarget": "toggles this tag on; would also add a chip above and move this fragment's state toward metadata-tag-picker-4"},
+      {"dataTap": "toggle:tag-next-action-extracted", "label": "ネクストアクション抽出済み checkbox row (unchecked)", "guessedTarget": "toggles this tag on"},
+      {"dataTap": "toggle:tag-external-meeting", "label": "社外会議 checkbox row (unchecked)", "guessedTarget": "toggles this tag on"},
+      {"dataTap": "toggle:tag-cancelled", "label": "解約 checkbox row (unchecked, last/no divider)", "guessedTarget": "toggles this tag on"},
+      {"dataTap": "apply:tag-selection", "label": "適用 (apply) text button", "guessedTarget": "confirms tag selection, closes sheet, updates the chip summary on metadata-edit's タグ row"}
+    ],
+    "notes": "Paired state with metadata-tag-picker-4 (5270:82938) — same タグ編集 sheet, same 6 candidate tags, different selection count (2 selected here vs 4 there). Kept as two separate fragments per the brief's instruction not to merge sibling nodes myself; central assembly may wish to merge these into one CSS-toggled tag-sheet component with live chip-count logic instead of two static screens."
+  },
+  {
+    "slug": "metadata-tag-picker-4",
+    "figmaNodeId": "5270:82938",
+    "title": "タグ編集",
+    "fragmentFile": "screens/metadata-tag-picker-4.html",
+    "description": "Bottom sheet opened from the metadata-edit screen's タグ row, for multi-selecting tags. This is state B of the 2-state pair with 5270:82476 (metadata-tag-picker-2): here 4 tags are selected (オンライン相談会, 社内会議, 未確認, ネクストアクション抽出済み), shown as a wrapped 2-row chip group at the top and as checked rows below; 社外会議 and 解約 remain unchecked.",
+    "tapTargets": [
+      {"dataTap": "close:tag-picker", "label": "X close icon / overlay tap", "guessedTarget": "dismisses sheet, no change"},
+      {"dataTap": "remove:tag-online-consultation", "label": "x on 'オンライン相談会' chip", "guessedTarget": "deselects this tag"},
+      {"dataTap": "remove:tag-internal-meeting", "label": "x on '社内会議' chip", "guessedTarget": "deselects this tag"},
+      {"dataTap": "remove:tag-unconfirmed", "label": "x on '未確認' chip", "guessedTarget": "deselects this tag"},
+      {"dataTap": "remove:tag-next-action-extracted", "label": "x on 'ネクストアクション抽出済み' chip", "guessedTarget": "deselects this tag"},
+      {"dataTap": "toggle:tag-online-consultation", "label": "オンライン相談会 checkbox row (checked)", "guessedTarget": "toggles this tag off"},
+      {"dataTap": "toggle:tag-internal-meeting", "label": "社内会議 checkbox row (checked)", "guessedTarget": "toggles this tag off"},
+      {"dataTap": "toggle:tag-unconfirmed", "label": "未確認 checkbox row (checked)", "guessedTarget": "toggles this tag off"},
+      {"dataTap": "toggle:tag-next-action-extracted", "label": "ネクストアクション抽出済み checkbox row (checked)", "guessedTarget": "toggles this tag off"},
+      {"dataTap": "toggle:tag-external-meeting", "label": "社外会議 checkbox row (unchecked)", "guessedTarget": "toggles this tag on"},
+      {"dataTap": "toggle:tag-cancelled", "label": "解約 checkbox row (unchecked, last/no divider)", "guessedTarget": "toggles this tag on"},
+      {"dataTap": "apply:tag-selection", "label": "適用 (apply) text button", "guessedTarget": "confirms tag selection, closes sheet, updates the chip summary on metadata-edit's タグ row (note: metadata-edit's own タグ row shows only 'オンライン相談会 +2' i.e. 3 tags, not 4 — see notes)"}
+    ],
+    "notes": "Paired state with metadata-tag-picker-2 (5270:82476) — see that entry's notes. Also: the base metadata-edit screen's タグ row chip summary ('オンライン相談会' + '+2' = 3 tags total) doesn't exactly match either sheet's selection count (2 or 4), confirming per the metadata-edit entry's notes that these sheets represent independent in-progress Figma states, not a before/after pair that was kept in sync with the base screen."
+  }
+]

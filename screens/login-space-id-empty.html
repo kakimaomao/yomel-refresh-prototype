@@ -1,0 +1,64 @@
+<section class="board" id="scr-login-space-id-empty">
+  <style>
+    /* styles scoped under #scr-login-space-id-empty — bespoke to this screen only. */
+    #scr-login-space-id-empty .bg-wave{
+      position:absolute; top:-220px; left:calc(50% + 15.31px); width:1113.54px; height:390.13px;
+      transform:translateX(-50%) rotate(7.97deg); z-index:0; pointer-events:none;
+    }
+    #scr-login-space-id-empty .btn{padding:20px 10px;}
+    #scr-login-space-id-empty .bg-wave img{display:block; width:100%; height:100%;}
+    #scr-login-space-id-empty .content{
+      position:absolute; left:0; top:187px; width:430px; padding:0 20px;
+      display:flex; flex-direction:column; gap:36px; z-index:1;
+    }
+    #scr-login-space-id-empty .logo{width:54px; height:37px;}
+    #scr-login-space-id-empty .logo img{display:block; width:100%; height:100%;}
+    #scr-login-space-id-empty .heading{
+      font-size:24px; font-weight:600; line-height:1.4; color:var(--text); margin:0;
+    }
+    #scr-login-space-id-empty .form{display:flex; flex-direction:column; gap:24px;}
+    #scr-login-space-id-empty .field-group{display:flex; flex-direction:column; gap:16px;}
+    #scr-login-space-id-empty .field-text{
+      border:0; outline:0; background:transparent; width:100%; padding:0;
+      font-size:17px; font-weight:300; font-family:inherit; color:var(--text);
+    }
+    #scr-login-space-id-empty .field-text::placeholder{color:var(--placeholder);}
+    #scr-login-space-id-empty .field{ gap:8px; }
+    #scr-login-space-id-empty .clear-icon{ width:20px; height:20px; display:none; cursor:pointer; flex-shrink:0; }
+    #scr-login-space-id-empty .clear-icon.show{ display:block; }
+    #scr-login-space-id-empty .space-id-link{
+      display:flex; font-size:15px; line-height:1; cursor:pointer;
+    }
+    #scr-login-space-id-empty .space-id-link .g{color:var(--primary);}
+    #scr-login-space-id-empty .space-id-link .gray{color:var(--text-faint);}
+  </style>
+
+  <div class="bg-wave"><img src="../assets/bg-wave.svg" alt=""></div>
+
+  <!-- status bar (always the same: 9:41, full signal/wifi/battery) -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="content">
+    <div class="logo"><img src="../assets/yomel-logo.svg" alt="Yomel"></div>
+    <h1 class="heading">Yomel にログイン</h1>
+    <div class="form">
+      <div class="field-group">
+        <div class="field">
+          <input class="field-text" id="spaceIdInput" type="text" placeholder="スペースIDを入力"
+                 autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+          <img class="clear-icon" id="spaceIdClear" src="../assets/input-clear-icon.svg" alt="クリア" data-tap="clear:space-id-input">
+        </div>
+        <div class="btn btn-disabled" id="spaceIdNextBtn" data-tap="go:verify-space-id">次へ</div>
+      </div>
+      <div class="space-id-link" data-tap="open:space-id-info">
+        <span class="g">スペースID</span><span class="gray">とは</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- home indicator (use class="home-indicator on-dark" if the screen's bottom area is dark) -->
+  <div class="home-indicator"><i></i></div>
+</section>

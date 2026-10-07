@@ -1,0 +1,227 @@
+[
+  {
+    "slug": "upload-pending-empty",
+    "figmaNodeId": "5270:83803",
+    "title": "アップロード待ち（空の状態）",
+    "fragmentFile": "screens/upload-pending-empty.html",
+    "description": "「アップロード待ち」画面の空状態。省データモードで録音された音声データが端末にまだ無い場合に表示される。ヘッダーに戻るボタンとタイトルのみで、中央にイラスト＋説明文。",
+    "tapTargets": [
+      {
+        "dataTap": "back",
+        "label": "戻るボタン（< アイコン）",
+        "guessedTarget": "直前の画面（おそらく録音ホーム画面やメニュー）に戻る"
+      }
+    ],
+    "notes": "当初の想定（メインメニュー／サイドドロワー）とは異なり、実際は『アップロード待ち』リストの空状態だった。同じタイトルを持つ4画面（このノードと5270:84856/85723/86019/83933/84256）は一つの『アップロード待ちリスト』機能の状態バリエーション群。"
+  },
+  {
+    "slug": "upload-pending-list",
+    "figmaNodeId": "5270:84856",
+    "title": "アップロード待ち（一覧・通常状態）",
+    "fragmentFile": "screens/upload-pending-list.html",
+    "description": "省データモードで録音され端末に保存されている録音データの一覧。各行にタイトル・グループ名・日付・再生時間・「…」メニューを表示。右上の「選択」で複数選択モードに入る。",
+    "tapTargets": [
+      {
+        "dataTap": "back",
+        "label": "戻るボタン",
+        "guessedTarget": "直前の画面に戻る"
+      },
+      {
+        "dataTap": "toggle:select-mode",
+        "label": "「選択」リンク",
+        "guessedTarget": "upload-pending-select-mode 相当の複数選択モードに遷移"
+      },
+      {
+        "dataTap": "open:row-menu:rec-1〜4",
+        "label": "各録音カード本体／「…」アイコン",
+        "guessedTarget": "upload-pending-row-actions-sheet 相当の行アクションシートを開く、またはupload-pending-row-player相当のインライン再生展開（Figma上は両方の表現が存在し、どちらがこの一覧からの実際の遷移かは不明瞭）"
+      }
+    ],
+    "notes": "4件のカードのうち2件目だけタイトルが長く2行省略表示される例として用意されている。他の3件は同一のダミータイトル「話者統合機能のUI改善とQAチーム連携」の使い回し。"
+  },
+  {
+    "slug": "upload-pending-row-player",
+    "figmaNodeId": "5270:85723",
+    "title": "アップロード待ち（行インライン再生展開）",
+    "fragmentFile": "screens/upload-pending-row-player.html",
+    "description": "upload-pending-list と同じ一覧だが、先頭の行が展開され、シークバー・経過/残り時間・削除／15秒戻す／再生／15秒進める／アップロード、のミニプレイヤーが行内に表示された状態。",
+    "tapTargets": [
+      {
+        "dataTap": "toggle:row-player:rec-1",
+        "label": "展開中の行の「…」アイコン（再タップで閉じる想定）",
+        "guessedTarget": "ミニプレイヤーを閉じて通常の行表示に戻す"
+      },
+      {
+        "dataTap": "delete:rec-1",
+        "label": "ゴミ箱アイコン",
+        "guessedTarget": "この録音を削除（確認ダイアログが入る可能性）"
+      },
+      {
+        "dataTap": "seek:back15:rec-1",
+        "label": "15秒戻るアイコン",
+        "guessedTarget": "再生位置を15秒戻す"
+      },
+      {
+        "dataTap": "toggle:play:rec-1",
+        "label": "再生ボタン",
+        "guessedTarget": "インライン試聴の再生/一時停止"
+      },
+      {
+        "dataTap": "seek:fwd15:rec-1",
+        "label": "15秒進むアイコン",
+        "guessedTarget": "再生位置を15秒進める"
+      },
+      {
+        "dataTap": "go:upload-single:rec-1",
+        "label": "緑色のアップロード雲アイコン",
+        "guessedTarget": "この1件だけをアップロード実行"
+      },
+      {
+        "dataTap": "open:row-menu:rec-2〜4",
+        "label": "未展開の他の行",
+        "guessedTarget": "同様に展開、または行アクションシートを開く"
+      }
+    ],
+    "notes": "upload-pending-row-actions-sheet（5270:83933）・upload-pending-edit-info-sheet（5270:84256）も同じ『先頭行展開』状態を下敷きにしているが、そちらでは「…」タップの結果がインラインプレイヤーではなく別のボトムシート（アップロード/録音情報の変更/削除）になっている。Figma内で同じトリガー（行の「…」アイコン）に対して2系統の異なる結果（インライン展開 vs アクションシート）が併存しており、どちらが最終仕様か本体からは判断できない。中央アセンブリ側で意図を確認/統合してほしい。"
+  },
+  {
+    "slug": "upload-pending-select-mode",
+    "figmaNodeId": "5270:86019",
+    "title": "アップロード待ち（複数選択モード）",
+    "fragmentFile": "screens/upload-pending-select-mode.html",
+    "description": "一覧画面で「選択」をタップした後の複数選択状態。各行の右側がチェックサークルに変わり、上部に選択件数と「すべて選択」、下部に固定の「削除」「アップロード」アクションバーが表示される。",
+    "tapTargets": [
+      {
+        "dataTap": "back",
+        "label": "戻るボタン",
+        "guessedTarget": "直前の画面に戻る（選択モードのままか要確認）"
+      },
+      {
+        "dataTap": "toggle:select-mode-off",
+        "label": "「キャンセル」",
+        "guessedTarget": "選択モードを終了し upload-pending-list に戻る"
+      },
+      {
+        "dataTap": "toggle:select-all",
+        "label": "「すべて選択」",
+        "guessedTarget": "全件選択/解除をトグル"
+      },
+      {
+        "dataTap": "toggle:checkbox-rec-1〜4",
+        "label": "各行のチェックサークル／行本体",
+        "guessedTarget": "その行の選択状態をトグルし、上部の件数表示を更新"
+      },
+      {
+        "dataTap": "delete:selected",
+        "label": "下部バーの「削除」",
+        "guessedTarget": "選択中の録音をまとめて削除（確認ダイアログが入る可能性）"
+      },
+      {
+        "dataTap": "go:upload-selected",
+        "label": "下部バーの「アップロード」",
+        "guessedTarget": "選択中の録音をまとめてアップロード開始"
+      }
+    ],
+    "notes": "Figmaデータでは4件中3件がチェック済み・1件が未チェックの状態で用意されていた（件数表示「3件選択中」と整合）。そのまま再現した。"
+  },
+  {
+    "slug": "upload-pending-row-actions-sheet",
+    "figmaNodeId": "5270:83933",
+    "title": "アップロード待ち（行アクションのボトムシート）",
+    "fragmentFile": "screens/upload-pending-row-actions-sheet.html",
+    "description": "一覧（先頭行展開状態）の上に、暗い背景オーバーレイとともに録音1件分のアクションシートが重なった状態。シート内に録音アイコン・タイトル・作成者、「アップロード」「録音情報の変更」ボタン、赤字の「削除」ボタンを表示。",
+    "tapTargets": [
+      {
+        "dataTap": "close:row-actions-sheet",
+        "label": "背景の暗いオーバーレイ、またはシート右上の×アイコン",
+        "guessedTarget": "シートを閉じて upload-pending-row-player 相当の背景画面に戻る"
+      },
+      {
+        "dataTap": "go:upload-single",
+        "label": "「アップロード」行",
+        "guessedTarget": "この録音のアップロードを開始"
+      },
+      {
+        "dataTap": "open:edit-info-sheet",
+        "label": "「録音情報の変更」行",
+        "guessedTarget": "upload-pending-edit-info-sheet（録音情報の変更ボトムシート）を開く"
+      },
+      {
+        "dataTap": "delete:recording",
+        "label": "赤字「削除」ボタン",
+        "guessedTarget": "この録音を削除（確認ダイアログが入る可能性）"
+      }
+    ],
+    "notes": "シート見出しのタイトル『管理者権限の統一化と自動ログアウト挙動の確認』・作成者『片岡新太郎』は、背後の一覧の行タイトル（話者統合機能のUI改善とQAチーム連携）と一致しておらず、Figma側のダミーデータの不整合。コンポーネントの汎用プレースホルダーとしてそのまま再現した。このシートが一覧のどの操作（単なる「…」タップか、長押しか）から開くのかはFigma上では明示されておらず、upload-pending-row-player との関係も含め要確認。"
+  },
+  {
+    "slug": "upload-pending-edit-info-sheet",
+    "figmaNodeId": "5270:84256",
+    "title": "アップロード待ち（録音情報の変更シート）",
+    "fragmentFile": "screens/upload-pending-edit-info-sheet.html",
+    "description": "行アクションシートの「録音情報の変更」から開く詳細設定ボトムシート。タイトル・メモ入力欄、保存先グループ選択、文字起こし関連のトグル（自動要約／話者分離を使用／英語モード）、保存ボタンを表示。",
+    "tapTargets": [
+      {
+        "dataTap": "close:edit-info-sheet",
+        "label": "左上の×アイコン",
+        "guessedTarget": "変更を破棄してシートを閉じ、upload-pending-row-actions-sheet または一覧に戻る"
+      },
+      {
+        "dataTap": "edit:title",
+        "label": "「タイトルを入力」欄",
+        "guessedTarget": "テキスト入力（本プロトタイプでは実入力なし）"
+      },
+      {
+        "dataTap": "edit:memo",
+        "label": "「メモ」欄",
+        "guessedTarget": "テキスト入力（本プロトタイプでは実入力なし）"
+      },
+      {
+        "dataTap": "open:group-picker",
+        "label": "「グループ」行（現在値: UIUXデザイン）",
+        "guessedTarget": "保存先グループの選択画面/シートを開く"
+      },
+      {
+        "dataTap": "toggle:auto-summary",
+        "label": "「自動要約」トグル",
+        "guessedTarget": "自動要約のON/OFF切り替え"
+      },
+      {
+        "dataTap": "toggle:speaker-diarization",
+        "label": "「話者分離を使用」トグル",
+        "guessedTarget": "話者分離のON/OFF切り替え"
+      },
+      {
+        "dataTap": "toggle:english-mode",
+        "label": "「英語モード」トグル",
+        "guessedTarget": "英語モードのON/OFF切り替え"
+      },
+      {
+        "dataTap": "save:recording-info",
+        "label": "緑色の「保存」ボタン",
+        "guessedTarget": "変更を保存してシートを閉じ、一覧に戻る"
+      }
+    ],
+    "notes": "Figmaのコードでは『話者分離を使用』のみ初期状態でONになっており、他2つはOFF。暗い背景オーバーレイはこの画面には実装されておらず（upload-pending-row-actions-sheetとは異なりスクリムが見当たらない）、一覧がそのまま背後に明るく見える点をそのまま再現した（Figma側の作り込み漏れの可能性あり）。"
+  },
+  {
+    "slug": "upload-pending-delete-confirm",
+    "figmaNodeId": "5390:174743",
+    "title": "アップロード待ち（削除確認ダイアログ）",
+    "fragmentFile": "screens/upload-pending-delete-confirm.html",
+    "description": "一覧/選択モード/行インライン再生の「削除」から開く確認ダイアログ。確定すると対象の録音が一覧から消える。",
+    "tapTargets": [
+      {
+        "dataTap": "cancel:delete",
+        "label": "「キャンセル」または背景スクリム",
+        "guessedTarget": "ダイアログを閉じて直前の画面に戻る（削除しない）"
+      },
+      {
+        "dataTap": "confirm:delete",
+        "label": "赤字「削除」",
+        "guessedTarget": "対象の録音を一覧から実際に削除し、一覧に戻る"
+      }
+    ],
+    "notes": "Figma上は一覧（upload-pending-list）の上に直接重なった状態で用意されていたため、行アクションシート/選択モード/行インライン再生のどこから開いても、確定後は一覧まで一気に戻る実装にした。"
+  }
+]

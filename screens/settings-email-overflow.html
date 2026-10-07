@@ -1,0 +1,141 @@
+<section class="board" id="scr-settings-email-overflow">
+  <style>
+    #scr-settings-email-overflow{ background:#f8f9fa; }
+    #scr-settings-email-overflow .content{
+      position:absolute; top:70px; left:0; right:0; bottom:21px;
+      overflow-y:auto; -webkit-overflow-scrolling:touch;
+    }
+    #scr-settings-email-overflow .titlebar{
+      position:relative; display:flex; align-items:center; justify-content:center;
+      padding:20px 0; min-height:60px;
+    }
+    #scr-settings-email-overflow .titlebar .back-btn{
+      position:absolute; left:16px; top:50%; transform:translateY(-50%);
+      width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+    }
+    #scr-settings-email-overflow .titlebar .title{ font-size:20px; font-weight:600; color:var(--text); }
+    #scr-settings-email-overflow .inner{ padding:8px 16px 32px; display:flex; flex-direction:column; }
+    #scr-settings-email-overflow .section{ display:flex; flex-direction:column; gap:12px; margin-top:32px; }
+    #scr-settings-email-overflow .section:first-child{ margin-top:0; }
+    #scr-settings-email-overflow .section-label{ font-size:18px; font-weight:600; color:var(--text-faint); padding:0 4px; }
+    #scr-settings-email-overflow .card{ background:#fff; border-radius:12px; padding:2px 20px; display:flex; flex-direction:column; }
+    #scr-settings-email-overflow .setting-row{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      min-height:56px; padding:12px 0; border-bottom:.5px solid rgba(31,35,41,.15);
+    }
+    #scr-settings-email-overflow .setting-row:last-child{ border-bottom:none; }
+    #scr-settings-email-overflow .setting-row.wrap{ align-items:flex-start; gap:36px; min-height:0; }
+    #scr-settings-email-overflow .setting-row.stacked{
+      flex-direction:column; align-items:flex-start; gap:12px; padding:18.5px 0;
+    }
+    #scr-settings-email-overflow .setting-row .label{ font-size:18px; font-weight:300; color:var(--text); }
+    #scr-settings-email-overflow .setting-row .label.multiline{ line-height:1.5; flex:1; min-width:0; }
+    #scr-settings-email-overflow .setting-row .value{ font-size:17px; font-weight:300; color:var(--text-weak); }
+    #scr-settings-email-overflow .setting-row.stacked .value{ word-break:break-all; }
+    #scr-settings-email-overflow .toggle{
+      width:64px; height:28px; border-radius:100px; background:rgba(60,60,67,.3);
+      position:relative; flex-shrink:0;
+    }
+    #scr-settings-email-overflow .toggle i{
+      position:absolute; top:2px; left:2px; width:24px; height:24px; border-radius:50%;
+      background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.15);
+    }
+    #scr-settings-email-overflow .toggle.on{ background:#34c759; }
+    #scr-settings-email-overflow .toggle.on i{ left:38px; }
+    #scr-settings-email-overflow .logout-card{ background:#fff; border-radius:12px; padding:0 16px; display:flex; margin-top:48px; }
+    #scr-settings-email-overflow .logout-btn{
+      flex:1; height:64px; display:flex; align-items:center; justify-content:center;
+      font-size:18px; font-weight:300; color:#bd3734;
+    }
+    #scr-settings-email-overflow .footer{ display:flex; flex-direction:column; align-items:center; gap:16px; padding-top:16px; }
+    #scr-settings-email-overflow .version{ font-size:14px; color:var(--text-faint); }
+    #scr-settings-email-overflow .license-link{ font-size:15px; color:var(--primary); }
+  </style>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="content">
+    <div class="titlebar">
+      <div class="back-btn" data-tap="open:side-menu"><img src="../assets/icon-menu-hamburger-32.svg" width="32" height="32" alt=""></div>
+      <div class="title">環境設定</div>
+    </div>
+
+    <div class="inner">
+      <div class="section">
+        <div class="section-label">一般</div>
+        <div class="card">
+          <div class="setting-row">
+            <span class="label">情報入力画面をスキップ</span>
+            <div class="toggle" data-tap="toggle:skip-info-input"><i></i></div>
+          </div>
+          <div class="setting-row">
+            <span class="label">書き起こし中のテキストを表示</span>
+            <div class="toggle" data-tap="toggle:show-transcribing-text"><i></i></div>
+          </div>
+          <div class="setting-row">
+            <span class="label">ダークモード</span>
+            <div class="toggle" data-tap="toggle:dark-mode"><i></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">アップロード設定</div>
+        <div class="card">
+          <div class="setting-row">
+            <span class="label">データを自動でアップロード</span>
+            <div class="toggle" data-tap="toggle:auto-upload"><i></i></div>
+          </div>
+          <div class="setting-row wrap">
+            <span class="label multiline">モバイル通信を使用してアップロード</span>
+            <div class="toggle" data-tap="toggle:upload-over-cellular"><i></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">文字起こし設定</div>
+        <div class="card">
+          <div class="setting-row">
+            <span class="label">自動要約</span>
+            <div class="toggle" data-tap="toggle:auto-summary"><i></i></div>
+          </div>
+          <div class="setting-row">
+            <span class="label">話者分離を使用</span>
+            <div class="toggle on" data-tap="toggle:speaker-diarization"><i></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">アカウント</div>
+        <div class="card">
+          <div class="setting-row">
+            <span class="label">スペースID</span>
+            <span class="value">ernie</span>
+          </div>
+          <div class="setting-row stacked">
+            <span class="label">メールアドレス</span>
+            <span class="value">kakikakikakikaki_mao@pkshatech.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="logout-card">
+        <div class="logout-btn" data-tap="logout">ログアウト</div>
+      </div>
+
+      <div class="footer">
+        <div class="version">app version: 1.5.0 (87)</div>
+        <div class="license-link" data-tap="open:license-list">ライセンス情報</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

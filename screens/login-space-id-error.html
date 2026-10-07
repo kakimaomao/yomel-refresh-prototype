@@ -1,0 +1,76 @@
+<section class="board" id="scr-login-space-id-error">
+  <style>
+    /* styles scoped under #scr-login-space-id-error — bespoke to this screen only. */
+    #scr-login-space-id-error .bg-wave{
+      position:absolute; top:-220px; left:calc(50% + 15.31px); width:1113.54px; height:390.13px;
+      transform:translateX(-50%) rotate(7.97deg); z-index:0; pointer-events:none;
+    }
+    #scr-login-space-id-error .btn{padding:20px 10px;}
+    #scr-login-space-id-error .bg-wave img{display:block; width:100%; height:100%;}
+    #scr-login-space-id-error .content{
+      position:absolute; left:0; top:187px; width:430px; padding:0 20px;
+      display:flex; flex-direction:column; gap:36px; z-index:1;
+    }
+    #scr-login-space-id-error .logo{width:54px; height:37px;}
+    #scr-login-space-id-error .logo img{display:block; width:100%; height:100%;}
+    #scr-login-space-id-error .heading{
+      font-size:24px; font-weight:600; line-height:1.4; color:var(--text); margin:0;
+    }
+    #scr-login-space-id-error .form{display:flex; flex-direction:column; gap:24px;}
+    #scr-login-space-id-error .field-group{display:flex; flex-direction:column; gap:16px;}
+    #scr-login-space-id-error .field{padding-right:12px; justify-content:space-between;}
+    #scr-login-space-id-error .field-text.value{color:var(--text); font-size:17px; font-weight:300;}
+    #scr-login-space-id-error .clear-btn{
+      width:24px; height:24px; flex:0 0 24px; cursor:pointer; display:flex;
+    }
+    #scr-login-space-id-error .clear-btn img{width:100%; height:100%; display:block;}
+    #scr-login-space-id-error .space-id-link{
+      display:flex; font-size:15px; line-height:1; cursor:pointer;
+    }
+    #scr-login-space-id-error .space-id-link .g{color:var(--primary);}
+    #scr-login-space-id-error .space-id-link .gray{color:var(--text-faint);}
+    #scr-login-space-id-error .toast{
+      position:absolute; left:50%; top:554px; transform:translateX(-50%);
+      display:flex; align-items:center; gap:8px; padding:12px 20px;
+      background:rgba(0,0,0,.85); border-radius:44px; white-space:nowrap; z-index:5;
+    }
+    #scr-login-space-id-error .toast img{width:20px; height:20px; display:block;}
+    #scr-login-space-id-error .toast span{color:#fff; font-size:15px; font-weight:600;}
+  </style>
+
+  <div class="bg-wave"><img src="../assets/bg-wave.svg" alt=""></div>
+
+  <!-- status bar (always the same: 9:41, full signal/wifi/battery) -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="content">
+    <div class="logo"><img src="../assets/yomel-logo.svg" alt="Yomel"></div>
+    <h1 class="heading">Yomel にログイン</h1>
+    <div class="form">
+      <div class="field-group">
+        <div class="field" data-tap="focus:space-id-input">
+          <span class="field-text value">ernie</span>
+          <div class="clear-btn" data-tap="clear:space-id-input">
+            <img src="../assets/input-clear-icon.svg" alt="クリア">
+          </div>
+        </div>
+        <div class="btn btn-primary" data-tap="go:verify-space-id">次へ</div>
+      </div>
+      <div class="space-id-link" data-tap="open:space-id-info">
+        <span class="g">スペースID</span><span class="gray">とは</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- transient error toast: the submitted space ID was not found -->
+  <div class="toast">
+    <img src="../assets/toast-error-icon.svg" alt="">
+    <span>スペースIDが存在しません</span>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

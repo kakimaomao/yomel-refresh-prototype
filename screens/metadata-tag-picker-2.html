@@ -1,0 +1,92 @@
+<section class="board" id="scr-metadata-tag-picker-2">
+  <style>
+    #scr-metadata-tag-picker-2{ background:transparent; }
+
+    /* ---- modal overlay ---- */
+    #scr-metadata-tag-picker-2 .overlay{
+      position:absolute; inset:0; background:rgba(0,0,0,.5); z-index:60;
+    }
+    #scr-metadata-tag-picker-2 .sheet{
+      position:absolute; left:0; bottom:0; width:430px; height:758px;
+      background:#fff; border-radius:8px 8px 0 0; z-index:61;
+      display:flex; flex-direction:column;
+    }
+    #scr-metadata-tag-picker-2 .sheet-header{
+      position:relative; display:flex; align-items:center; justify-content:space-between;
+      padding:20px;
+    }
+    #scr-metadata-tag-picker-2 .sheet-header img{ width:20px; height:20px; display:block; cursor:pointer; }
+    #scr-metadata-tag-picker-2 .sheet-title{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      font-size:18px; font-weight:600; color:var(--text); white-space:nowrap;
+    }
+    #scr-metadata-tag-picker-2 .sheet-apply{ font-size:18px; font-weight:300; color:var(--primary); }
+    #scr-metadata-tag-picker-2 .sheet-body{ padding:8px 16px 48px; display:flex; flex-direction:column; gap:12px; }
+    #scr-metadata-tag-picker-2 .chips-box{
+      background:var(--bg-weak); border-radius:12px; padding:8px;
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    #scr-metadata-tag-picker-2 .selected-chip{
+      display:inline-flex; align-items:center; gap:4px; background:rgba(31,35,41,.05);
+      border-radius:4px; padding:4px 6px; font-size:15px; font-weight:300; color:var(--text);
+    }
+    #scr-metadata-tag-picker-2 .selected-chip img{ width:20px; height:20px; display:block; cursor:pointer; }
+    #scr-metadata-tag-picker-2 .checkbox-list{ display:flex; flex-direction:column; }
+    #scr-metadata-tag-picker-2 .checkbox-row{
+      display:flex; align-items:center; gap:16px; width:100%;
+    }
+    #scr-metadata-tag-picker-2 .checkbox-row .label{
+      flex:1; min-width:0; min-height:60px; display:flex; align-items:center;
+      padding:20px 0; border-bottom:.5px solid var(--border);
+      font-size:17px; font-weight:300; color:var(--text);
+    }
+    #scr-metadata-tag-picker-2 .checkbox-row.no-border .label{ border-bottom:none; }
+    #scr-metadata-tag-picker-2 .checkbox-row img.checkbox{ width:24px; height:24px; display:block; flex-shrink:0; }
+  </style>
+
+  <!-- the real screen underneath (e.g. 情報を入力) shows through — this
+       fragment is just the scrim + sheet overlay -->
+
+  <!-- tag editor bottom sheet: 2 tags currently selected -->
+  <div class="overlay" data-tap="close:tag-picker">
+    <div class="sheet">
+      <div class="sheet-header">
+        <img src="../assets/icon-close.svg" alt="close" data-tap="close:tag-picker">
+        <span class="sheet-title">タグ編集</span>
+        <span class="sheet-apply" data-tap="apply:tag-selection">適用</span>
+      </div>
+      <div class="sheet-body">
+        <div class="chips-box">
+          <span class="selected-chip">オンライン相談会<img src="../assets/icon-chip-remove.svg" alt="remove" data-tap="remove:tag-online-consultation"></span>
+          <span class="selected-chip">社内会議<img src="../assets/icon-chip-remove.svg" alt="remove" data-tap="remove:tag-internal-meeting"></span>
+        </div>
+        <div class="checkbox-list">
+          <div class="checkbox-row" data-tap="toggle:tag-online-consultation">
+            <img class="checkbox" src="../assets/icon-checkbox-checked.svg" alt="checked">
+            <span class="label">オンライン相談会</span>
+          </div>
+          <div class="checkbox-row" data-tap="toggle:tag-internal-meeting">
+            <img class="checkbox" src="../assets/icon-checkbox-checked.svg" alt="checked">
+            <span class="label">社内会議</span>
+          </div>
+          <div class="checkbox-row" data-tap="toggle:tag-unconfirmed">
+            <img class="checkbox" src="../assets/icon-checkbox-unchecked.svg" alt="unchecked">
+            <span class="label">未確認</span>
+          </div>
+          <div class="checkbox-row" data-tap="toggle:tag-next-action-extracted">
+            <img class="checkbox" src="../assets/icon-checkbox-unchecked.svg" alt="unchecked">
+            <span class="label">ネクストアクション抽出済み</span>
+          </div>
+          <div class="checkbox-row" data-tap="toggle:tag-external-meeting">
+            <img class="checkbox" src="../assets/icon-checkbox-unchecked.svg" alt="unchecked">
+            <span class="label">社外会議</span>
+          </div>
+          <div class="checkbox-row no-border" data-tap="toggle:tag-cancelled">
+            <img class="checkbox" src="../assets/icon-checkbox-unchecked.svg" alt="unchecked">
+            <span class="label">解約</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

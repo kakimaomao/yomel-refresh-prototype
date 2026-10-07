@@ -1,0 +1,97 @@
+<section class="board" id="scr-upload-pending-edit-info-sheet">
+  <style>
+    #scr-upload-pending-edit-info-sheet { background: transparent; }
+
+    /* Figma's own background layer for this sheet is a 50%-black scrim
+       (bg-[rgba(0,0,0,0.5)] on the frame) — the earlier note claiming "no
+       scrim in source Figma file" was wrong; every other bottom sheet in
+       this prototype has the same scrim and this one was just missing it. */
+    #scr-upload-pending-edit-info-sheet .scrim {
+      position: absolute; inset: 0; background: rgba(0,0,0,.5); z-index: 59;
+    }
+    #scr-upload-pending-edit-info-sheet .edit-sheet {
+      position: absolute; left: 0; top: 294px; width: 430px; height: 638px; background: #f2f3f5;
+      border-radius: 8px 8px 0 0; z-index: 60; display: flex; flex-direction: column;
+    }
+    #scr-upload-pending-edit-info-sheet .edit-header {
+      position: relative; display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    #scr-upload-pending-edit-info-sheet .edit-header img { position: absolute; left: 20px; top: 20px; width: 20px; height: 20px; cursor: pointer; }
+    #scr-upload-pending-edit-info-sheet .edit-header p {
+      font-family: "Hiragino Kaku Gothic ProN", sans-serif; font-weight: 600; font-size: 18px; color: var(--text); margin: 0; line-height: 1;
+    }
+    #scr-upload-pending-edit-info-sheet .edit-body { padding: 8px 16px 48px; display: flex; flex-direction: column; gap: 48px; }
+    #scr-upload-pending-edit-info-sheet .edit-section-group { display: flex; flex-direction: column; gap: 20px; }
+    #scr-upload-pending-edit-info-sheet .edit-section { display: flex; flex-direction: column; gap: 12px; }
+    #scr-upload-pending-edit-info-sheet .edit-section h3 {
+      margin: 0; text-align: left; padding: 0 20px; font-family: "Hiragino Kaku Gothic Pro", sans-serif;
+      font-weight: 600; font-size: 18px; color: var(--text-faint); line-height: 1;
+    }
+    #scr-upload-pending-edit-info-sheet .edit-card { background: #fff; border-radius: 12px; padding: 2px 20px; }
+    #scr-upload-pending-edit-info-sheet .edit-field {
+      display: flex; align-items: center; min-height: 56px; padding: 12px 0; box-sizing: border-box; border-bottom: 1px solid rgba(31,35,41,.15); cursor: text;
+    }
+    #scr-upload-pending-edit-info-sheet .edit-field:last-child { border-bottom: none; height: 112px; align-items: flex-start; padding-top: 18.5px; }
+    #scr-upload-pending-edit-info-sheet .edit-field .placeholder { color: var(--placeholder); font-size: 18px; font-weight: 300; }
+    #scr-upload-pending-edit-info-sheet .edit-field .placeholder.editable-title { color: var(--text); min-width: 1px; width: 100%; white-space: normal; word-break: break-word; }
+    #scr-upload-pending-edit-info-sheet .edit-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; cursor: pointer; }
+    #scr-upload-pending-edit-info-sheet .edit-row:not(:last-child) { border-bottom: 1px solid rgba(31,35,41,.15); }
+    #scr-upload-pending-edit-info-sheet .edit-row-left { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 300; color: var(--text); flex-shrink: 0; }
+    #scr-upload-pending-edit-info-sheet .edit-row-left img { width: 20px; height: 20px; }
+    #scr-upload-pending-edit-info-sheet .edit-row-right { display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 300; color: var(--text-weak); flex: 1; min-width: 0; justify-content: flex-end; }
+    #scr-upload-pending-edit-info-sheet .edit-row-right img { width: 20px; height: 20px; flex-shrink: 0; }
+    #scr-upload-pending-edit-info-sheet .edit-row-right .js-group-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+
+    #scr-upload-pending-edit-info-sheet .toggle { width: 64px; height: 28px; border-radius: 100px; background: rgba(60,60,67,.3); position: relative; cursor: pointer; flex: none; }
+    #scr-upload-pending-edit-info-sheet .toggle::after { content: ""; position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; border-radius: 50%; background: #fff; }
+    #scr-upload-pending-edit-info-sheet .toggle.on { background: var(--primary); }
+    #scr-upload-pending-edit-info-sheet .toggle.on::after { left: 38px; }
+
+    #scr-upload-pending-edit-info-sheet .edit-save { width: 100%; height: 52px; font-size: 18px; }
+  </style>
+
+  <!-- the real upload-pending list underneath shows through, darkened by the
+       scrim; tapping the scrim (not a descendant of the sheet) closes it -->
+  <div class="scrim" data-tap="close:edit-info-sheet"></div>
+
+  <!-- edit recording info bottom sheet -->
+  <div class="edit-sheet">
+    <div class="edit-header">
+      <img data-tap="close:edit-info-sheet" src="../assets/icon-close.svg" alt="閉じる">
+      <p>録音情報の変更</p>
+    </div>
+    <div class="edit-body">
+      <div class="edit-section-group">
+      <div class="edit-section">
+        <h3>ログ情報</h3>
+        <div class="edit-card">
+          <div class="edit-field"><span class="placeholder editable-title" contenteditable="true" data-placeholder="タイトルを入力"></span></div>
+          <div class="edit-field" data-tap="focus:memo-field"><span class="placeholder editable-title" contenteditable="true" data-placeholder="メモ"></span></div>
+        </div>
+      </div>
+
+      <div class="edit-section">
+        <h3>保存先</h3>
+        <div class="edit-card">
+          <div class="edit-row" data-tap="open:group-picker">
+            <div class="edit-row-left"><img src="../assets/icon-group.svg" alt="">グループ</div>
+            <div class="edit-row-right"><span class="js-group-value">UIUXデザイン</span><img src="../assets/chevron-right-disclosure.svg" alt=""></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="edit-section">
+        <h3>文字起こし</h3>
+        <div class="edit-card">
+          <div class="edit-row">
+            <div class="edit-row-left"><img src="../assets/icon-english.svg" alt="">英語モード</div>
+            <div class="toggle" data-tap="toggle:english-mode"></div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="btn btn-primary edit-save" data-tap="save:recording-info">保存</div>
+    </div>
+  </div>
+</section>

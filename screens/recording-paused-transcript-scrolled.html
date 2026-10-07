@@ -1,0 +1,71 @@
+<section class="board" id="scr-recording-paused-transcript-scrolled">
+  <style>
+    #scr-recording-paused-transcript-scrolled .screen{position:absolute; top:51px; left:0; right:0; bottom:0; display:flex; flex-direction:column; overflow:hidden;}
+    #scr-recording-paused-transcript-scrolled .header{flex-shrink:0; border-bottom:1px solid rgba(0,0,0,.15); padding:24px 24px 0; display:flex; flex-direction:column;}
+    #scr-recording-paused-transcript-scrolled .tabs{display:flex; gap:20px;}
+    #scr-recording-paused-transcript-scrolled .tab{display:flex; flex-direction:column; gap:8px; padding:0 2px; cursor:pointer;}
+    #scr-recording-paused-transcript-scrolled .tab span{font-size:15px; line-height:1.5; white-space:nowrap;}
+    #scr-recording-paused-transcript-scrolled .tab.active span{font-weight:600; color:var(--text);}
+    #scr-recording-paused-transcript-scrolled .tab:not(.active) span{font-weight:300; color:var(--text-weak);}
+    #scr-recording-paused-transcript-scrolled .tab .bar{height:2px; border-radius:2px 2px 0 0; width:100%;}
+    #scr-recording-paused-transcript-scrolled .tab.active .bar{background:var(--text);}
+    #scr-recording-paused-transcript-scrolled .tab:not(.active) .bar{background:transparent;}
+    #scr-recording-paused-transcript-scrolled .content{flex:1; min-height:0; overflow-y:auto; padding:0 16px; position:relative;}
+    #scr-recording-paused-transcript-scrolled .bubble{background:#f1f7ed; border-radius:12px 4px 12px 12px; padding:12px; margin-left:40px; margin-bottom:12px; font-size:17px; font-weight:300; color:var(--text); line-height:1.5;}
+    #scr-recording-paused-transcript-scrolled .scroll-to-bottom{position:absolute; right:16px; bottom:16px; width:52px; height:52px; border-radius:35px; background:#8f959e; border:0.5px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer;}
+    #scr-recording-paused-transcript-scrolled .scroll-to-bottom img{width:32px; height:32px; display:block; transform:scaleY(-1);}
+    #scr-recording-paused-transcript-scrolled .bottombar{flex-shrink:0; height:104px; box-sizing:border-box; background:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 24px 24px;}
+    #scr-recording-paused-transcript-scrolled .timer{display:flex; align-items:center; gap:16px;}
+    #scr-recording-paused-transcript-scrolled .timer img{width:44px; height:16px; display:block;}
+    #scr-recording-paused-transcript-scrolled .timer span{font-size:14px; font-weight:600; color:var(--text);}
+    #scr-recording-paused-transcript-scrolled .actions{display:flex; align-items:center; gap:16px;}
+    #scr-recording-paused-transcript-scrolled .resume-btn{width:88px; height:44px; border-radius:16px; background:var(--primary); display:flex; align-items:center; justify-content:center; gap:4px; cursor:pointer;}
+    #scr-recording-paused-transcript-scrolled .resume-btn img{width:20px; height:20px; display:block;}
+    #scr-recording-paused-transcript-scrolled .resume-btn span{font-size:14px; font-weight:600; color:#fff; white-space:nowrap;}
+    #scr-recording-paused-transcript-scrolled .stop-btn{height:44px; padding:6px 16px; border-radius:16px; background:rgba(31,35,41,.05); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:600; color:var(--text); cursor:pointer; white-space:nowrap;}
+  </style>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="screen">
+    <!-- header collapsed: title/workspace row scrolled out of view, only tabs remain pinned -->
+    <div class="header">
+      <div class="tabs">
+        <div class="tab active" data-tap="switch-tab:transcript"><span>書き起こし</span><div class="bar"></div></div>
+        <div class="tab" data-tap="switch-tab:loginfo"><span>ログ情報</span><div class="bar"></div></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="bubble">本日YOMELのお打ち合わせを担当いたします。</div>
+      <div class="bubble">ナダと申します。</div>
+      <div class="bubble">よろしくお願いいたします。</div>
+      <div class="bubble">よろしくお願いいたします。</div>
+      <div class="bubble">もう凄いAIチャットの機能もいただけているということなので、なんか逆になんか使ってて、もっとここが便利になったらいいのにとか、気になることとかもぜひ、忌憚なくご意見いただければと思うんですが、なんかいかがですかね。</div>
+      <div class="bubble">本日YOMELのお打ち合わせを担当いたします。</div>
+      <div class="bubble">ナダと申します。</div>
+      <div class="bubble">よろしくお願いいたします。</div>
+      <div class="bubble">よろしくお願いいたします。</div>
+      <div class="scroll-to-bottom" data-tap="scroll-to-bottom"><img src="../assets/icon-chevron-down-circle.svg" alt=""></div>
+    </div>
+    <div class="bottombar">
+      <div class="timer">
+        <img src="../assets/icon-waveform-mini.svg" alt="">
+        <span>00:20</span>
+      </div>
+      <div class="actions">
+        <div class="resume-btn" data-tap="go:resume-recording">
+          <img src="../assets/icon-mic-resume-small.svg" alt="">
+          <span>再開</span>
+        </div>
+        <div class="stop-btn" data-tap="go:stop-recording">録音停止</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

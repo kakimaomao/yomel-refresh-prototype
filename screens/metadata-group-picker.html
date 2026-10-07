@@ -1,0 +1,83 @@
+<section class="board" id="scr-metadata-group-picker">
+  <style>
+    #scr-metadata-group-picker{ background:transparent; }
+
+    /* ---- modal overlay ---- */
+    #scr-metadata-group-picker .overlay{
+      position:absolute; inset:0; background:rgba(0,0,0,.5); z-index:60;
+    }
+    #scr-metadata-group-picker .sheet{
+      position:absolute; left:0; bottom:0; width:430px; height:758px;
+      background:#fff; border-radius:8px 8px 0 0; z-index:61;
+      display:flex; flex-direction:column;
+    }
+    #scr-metadata-group-picker .sheet-header{
+      position:relative; display:flex; align-items:center; justify-content:space-between;
+      padding:20px;
+    }
+    #scr-metadata-group-picker .sheet-header img{ width:20px; height:20px; display:block; cursor:pointer; }
+    #scr-metadata-group-picker .sheet-title{
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      font-size:18px; font-weight:600; color:var(--text); white-space:nowrap;
+    }
+    #scr-metadata-group-picker .sheet-apply{ font-size:18px; font-weight:300; color:var(--primary); }
+    #scr-metadata-group-picker .sheet-body{ padding:8px 16px 48px; display:flex; flex-direction:column; gap:12px; }
+    #scr-metadata-group-picker .sheet-search{
+      background:var(--bg-weak); border-radius:8px; height:40px;
+      display:flex; align-items:center; gap:8px; padding:0 8px;
+    }
+    #scr-metadata-group-picker .sheet-search img{ width:18px; height:18px; display:block; }
+    #scr-metadata-group-picker .sheet-search span{ font-size:17px; font-weight:300; color:var(--placeholder); }
+    #scr-metadata-group-picker .sheet-list{ display:flex; flex-direction:column; }
+    #scr-metadata-group-picker .sheet-list .item{
+      display:flex; align-items:flex-start; gap:8px; min-height:60px; padding:20px 0;
+      border-bottom:.5px solid var(--border);
+    }
+    #scr-metadata-group-picker .sheet-list .item.no-border{ border-bottom:none; }
+    #scr-metadata-group-picker .sheet-list .item .item-left{ display:flex; align-items:flex-start; gap:8px; flex:1; min-width:0; }
+    #scr-metadata-group-picker .sheet-list .item img.icon{ width:20px; height:20px; display:block; flex-shrink:0; margin-top:2px; }
+    #scr-metadata-group-picker .sheet-list .item span{ font-size:17px; font-weight:300; color:var(--text); line-height:1.5; padding-top:2px; }
+    #scr-metadata-group-picker .sheet-list .item img.check{ width:24px; height:24px; display:block; flex-shrink:0; margin-top:2px; }
+  </style>
+
+  <!-- the real screen underneath (e.g. 情報を入力) shows through — this
+       fragment is just the scrim + sheet overlay -->
+
+  <!-- group picker bottom sheet -->
+  <div class="overlay" data-tap="close:group-picker">
+    <div class="sheet">
+      <div class="sheet-header">
+        <img src="../assets/icon-close.svg" alt="close" data-tap="close:group-picker">
+        <span class="sheet-title">他のグループへ移動</span>
+        <span class="sheet-apply" data-tap="apply:group-selection">適用</span>
+      </div>
+      <div class="sheet-body">
+        <div class="sheet-search" data-tap="focus:group-search">
+          <img src="../assets/icon-search.svg" alt="">
+          <span>検索</span>
+        </div>
+        <div class="sheet-list">
+          <div class="item" data-tap="select:group-uiux-design">
+            <div class="item-left">
+              <img class="icon" src="../assets/icon-building-green.svg" alt="">
+              <span>UIUXデザイン</span>
+            </div>
+            <img class="check" src="../assets/icon-check-selected.svg" alt="selected">
+          </div>
+          <div class="item" data-tap="select:group-product-design-dept">
+            <div class="item-left">
+              <img class="icon" src="../assets/icon-building-green.svg" alt="">
+              <span>プロダクトデザイン開発推進チーム統括本部</span>
+            </div>
+          </div>
+          <div class="item no-border" data-tap="select:group-private-mode">
+            <div class="item-left">
+              <img class="icon" src="../assets/icon-private-lock.svg" alt="">
+              <span>プライベートモード</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

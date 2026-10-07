@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "settings-general",
+    "figmaNodeId": "5270:85090",
+    "title": "環境設定",
+    "fragmentFile": "screens/settings-general.html",
+    "description": "Main app settings screen, reached from somewhere in the main nav/tab bar (not part of this assignment). Has three sections (一般/general, アップロード設定/upload settings, アカウント/account) each a white rounded card of rows, plus a ログアウト (logout) card and app-version/license footer.",
+    "tapTargets": [
+      {"dataTap": "back", "label": "back chevron in title bar", "guessedTarget": "previous screen (likely home/tab root)"},
+      {"dataTap": "toggle:skip-info-input", "label": "情報入力画面をスキップ toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:show-transcribing-text", "label": "書き起こし中のテキストを表示 toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:dark-mode", "label": "ダークモード toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:auto-upload", "label": "データを自動でアップロード toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:upload-over-cellular", "label": "モバイル通信を使用してアップロード toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "logout", "label": "ログアウト button", "guessedTarget": "probably shows a confirm dialog then returns to a login screen"},
+      {"dataTap": "open:license-list", "label": "ライセンス情報 link", "guessedTarget": "goes to the license screen (node 5270:85306 / slug license-list)"}
+    ],
+    "notes": "This is one of a pair of near-identical state variants with node 5270:85507 (slug settings-email-overflow) — same screen, the only difference is the メールアドレス (email) row: here it's a short email on one line (label+value side by side), in the sibling node the email is artificially long and wraps to a stacked label-over-value layout, presumably to test overflow handling. Kept as two separate fragments per the brief; centralized assembly may want to treat the email row as a single screen with a CSS/JS long-text toggle instead. スペースID and メールアドレス rows show static values with no visible affordance (no chevron/button) in the Figma source, so I did NOT mark them as tappable — flag if they should actually be editable. Toggle components are custom CSS switches (all shown in the Figma 'off' state) rather than real Figma toggle assets, since no on-state examples existed in either node."
+  },
+  {
+    "slug": "settings-email-overflow",
+    "figmaNodeId": "5270:85507",
+    "title": "環境設定（メールアドレス長文表示）",
+    "fragmentFile": "screens/settings-email-overflow.html",
+    "description": "State variant of the 環境設定 (settings) screen with an artificially long email address (kakikakikakikaki_mao@pkshatech.com) in the アカウント section, demonstrating how the メールアドレス row wraps to a stacked label-over-value layout when the value overflows a single line. Otherwise identical to settings-general.",
+    "tapTargets": [
+      {"dataTap": "back", "label": "back chevron in title bar", "guessedTarget": "previous screen (likely home/tab root)"},
+      {"dataTap": "toggle:skip-info-input", "label": "情報入力画面をスキップ toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:show-transcribing-text", "label": "書き起こし中のテキストを表示 toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:dark-mode", "label": "ダークモード toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:auto-upload", "label": "データを自動でアップロード toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "toggle:upload-over-cellular", "label": "モバイル通信を使用してアップロード toggle", "guessedTarget": "toggles a setting in place, no navigation"},
+      {"dataTap": "logout", "label": "ログアウト button", "guessedTarget": "probably shows a confirm dialog then returns to a login screen"},
+      {"dataTap": "open:license-list", "label": "ライセンス情報 link", "guessedTarget": "goes to the license screen (node 5270:85306 / slug license-list)"}
+    ],
+    "notes": "Sibling state-variant of node 5270:85090 (slug settings-general) — see that entry's notes. This node exists purely to show the long-email overflow layout; it's probably not a separate real app screen, just a design QA artifact. Centralized assembly likely does not need a separate tap-through entry point for this screen (no other screen points to it specifically) — consider merging into settings-general as a toggleable state rather than a distinct linked screen."
+  },
+  {
+    "slug": "license-list",
+    "figmaNodeId": "5270:85306",
+    "title": "ライセンス",
+    "fragmentFile": "screens/license-list.html",
+    "description": "OSS license list screen, reached from the ライセンス情報 link at the bottom of the 環境設定 (settings) screen. Shows the app icon, app name/version/Flutter credit, and a scrollable card list of third-party package names with their license count and a disclosure chevron.",
+    "tapTargets": [
+      {"dataTap": "back", "label": "back chevron in title bar", "guessedTarget": "back to settings-general"},
+      {"dataTap": "open:license-detail", "label": "each package row (e.g. _fe_analyzer_shared, abseil-cpp, accessibility, ...)", "guessedTarget": "opens a license detail screen showing that package's license text; not part of this assignment so left generic"}
+    ],
+    "notes": "The Figma source data for the package list repeats '_fe_analyzer_shared' both as the first and last visible row (with the same count '1件') — this looks like placeholder/lorem data in the design file rather than a real license manifest, so I transcribed it verbatim rather than fixing the apparent duplicate. The list is longer than the viewport in the Figma frame (it's a scroll view), so the fragment makes .content scrollable; only the rows visible in the provided screenshot/code were included since that's all the design data available. All package rows use the same generic open:license-detail intent since no destination screen for license detail was in this assignment."
+  }
+]

@@ -1,0 +1,90 @@
+<section class="board" id="scr-recording-home-full">
+  <style>
+    #scr-recording-home-full .bg-wave-wrap{position:absolute; left:50%; top:-169px; width:1px; height:1px; overflow:visible; pointer-events:none; z-index:0;}
+    #scr-recording-home-full .bg-wave-wrap img{position:absolute; left:0; top:0; width:1091px; height:241px; transform:translate(-530px,74.49px) rotate(7.97deg); transform-origin:center;}
+    #scr-recording-home-full .home-header{position:absolute; top:85px; left:16px; width:398px; height:40px; z-index:2;}
+    #scr-recording-home-full .menu-btn{position:absolute; left:0; top:50%; transform:translateY(-50%); width:32px; height:32px; display:flex; align-items:center; justify-content:center; cursor:pointer;}
+    #scr-recording-home-full .menu-btn img{width:32px; height:32px; display:block;}
+    #scr-recording-home-full .logo{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); height:16.06px; display:block;}
+    #scr-recording-home-full .home-content{position:absolute; top:109px; left:0; width:430px; height:823px; box-sizing:border-box; padding:20px 16px 72px; display:flex; flex-direction:column; align-items:center; z-index:1;}
+#scr-recording-home-full .home-center{flex:1 0 auto; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:48px; width:100%;}
+#scr-recording-home-full .title-block{display:flex; flex-direction:column; align-items:center; gap:16px; width:100%;}
+    #scr-recording-home-full .title-row{display:inline-flex; justify-content:center; padding:12px 16px; border-bottom:1px solid rgba(31,35,41,.15); cursor:text; max-width:100%; box-sizing:border-box;}
+    #scr-recording-home-full .title-placeholder{font-size:24px; font-weight:600; color:var(--text); margin:0; line-height:1.3; min-width:1px; white-space:normal; word-break:break-word; text-align:center;}
+    #scr-recording-home-full .waveform-idle{display:flex; gap:10px; justify-content:center; padding:12px 16px;}
+    #scr-recording-home-full .waveform-idle span{width:8px; height:16px; border-radius:38px; background:rgba(31,35,41,.08); border:.5px solid rgba(31,35,41,.15); box-sizing:border-box;}
+    #scr-recording-home-full .mic-fab-wrap{display:flex; justify-content:center;}
+    #scr-recording-home-full .mic-fab-frost{background:rgba(255,255,255,.85); border-radius:63px; padding:4px; display:inline-flex;}
+    #scr-recording-home-full .mic-fab{width:88px; height:88px; border-radius:177px; background:var(--primary); border:none; display:flex; align-items:center; justify-content:center; box-shadow:inset -4px -4px 8px rgba(255,255,255,.25); cursor:pointer; padding:0;}
+    #scr-recording-home-full .mic-fab img{width:40px; height:40px; display:block;}
+    #scr-recording-home-full .settings-list{width:100%; display:flex; flex-direction:column; padding:0 8px;}
+    #scr-recording-home-full .settings-row{display:flex; align-items:center; justify-content:space-between; height:56px; padding:12px 0; border-bottom:1px solid rgba(31,35,41,.15); cursor:pointer; gap:16px;}
+    #scr-recording-home-full .settings-row.no-border{border-bottom:none;}
+    #scr-recording-home-full .row-left{display:flex; align-items:center; gap:12px; flex-shrink:0;}
+    #scr-recording-home-full .row-left img{width:20px; height:20px; display:block;}
+    #scr-recording-home-full .row-left span{font-size:18px; font-weight:300; color:var(--text); white-space:nowrap;}
+    #scr-recording-home-full .row-right{display:flex; align-items:center; gap:4px; flex:1; min-width:0;}
+    #scr-recording-home-full .row-right img{width:20px; height:20px; display:block; flex-shrink:0;}
+    #scr-recording-home-full .row-right .value{font-size:17px; font-weight:300; color:var(--text-weak); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:right;}
+    #scr-recording-home-full .toggle{width:64px; height:28px; border-radius:100px; background:rgba(60,60,67,.3); position:relative; flex-shrink:0; cursor:pointer;}
+    #scr-recording-home-full .toggle i{position:absolute; top:2px; left:2px; width:24px; height:24px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.15);}
+    #scr-recording-home-full .toggle.on{background:var(--primary);}
+    #scr-recording-home-full .toggle.on i{left:38px;}
+  </style>
+
+  <!-- decorative background wave -->
+  <div class="bg-wave-wrap"><img src="../assets/bg-wave.svg" alt=""></div>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <!-- header: hamburger + wordmark -->
+  <div class="home-header">
+    <div class="menu-btn" data-tap="open:side-menu"><img src="../assets/icon-menu-hamburger-32.svg" alt="menu"></div>
+    <img class="logo" src="../assets/yomel-wordmark.svg" alt="YOMEL">
+  </div>
+
+  <div class="home-content">
+    <div class="upload-reminder-banner" style="display:none;">
+      <img class="icon" src="../assets/icon-upload-reminder-warning.svg" alt="">
+      <span class="upload-reminder-text"></span>
+      <img class="close-btn" src="../assets/icon-upload-reminder-close.svg" alt="閉じる" data-tap="dismiss:upload-reminder">
+    </div>
+    <div class="home-center">
+    <div class="title-block">
+    <div class="title-row">
+      <p class="title-placeholder" contenteditable="true" data-placeholder="タイトルを入力"></p>
+    </div>
+    <div class="waveform-idle" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    </div>
+    <div class="mic-fab-wrap">
+      <div class="mic-fab-frost">
+        <button class="mic-fab" data-tap="go:start-recording"><img src="../assets/icon-mic.svg" alt="録音開始"></button>
+      </div>
+    </div>
+    </div>
+    <div class="settings-list">
+      <div class="settings-row" data-tap="open:group-picker">
+        <div class="row-left"><img src="../assets/icon-group.svg" alt=""><span>グループ</span></div>
+        <div class="row-right"><span class="value js-group-value">UIUXデザイン</span><img src="../assets/chevron-right-disclosure.svg" alt=""></div>
+      </div>
+      <div class="settings-row">
+        <div class="row-left"><img src="../assets/icon-offline.svg" alt=""><span>オフラインモード</span></div>
+        <div class="toggle" data-tap="toggle:offline-mode"><i></i></div>
+      </div>
+      <div class="settings-row no-border">
+        <div class="row-left"><img src="../assets/icon-english.svg" alt=""><span>英語モード</span></div>
+        <div class="toggle" data-tap="toggle:english-mode"><i></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

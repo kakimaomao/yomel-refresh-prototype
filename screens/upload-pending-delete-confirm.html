@@ -1,0 +1,42 @@
+<section class="board" id="scr-upload-pending-delete-confirm">
+  <style>
+    #scr-upload-pending-delete-confirm { background: transparent; }
+    #scr-upload-pending-delete-confirm .scrim {
+      position: absolute; inset: 0; background: rgba(0,0,0,.65);
+    }
+    #scr-upload-pending-delete-confirm .dialog {
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 350px; background: #fff; border-radius: 8px; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    #scr-upload-pending-delete-confirm .dialog-body {
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      padding: 32px 20px 28px; border-bottom: .5px solid #bbbfc4; text-align: center;
+      box-sizing: border-box;
+    }
+    #scr-upload-pending-delete-confirm .dialog-title { margin: 0; font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.5; }
+    #scr-upload-pending-delete-confirm .dialog-message { margin: 0; font-size: 18px; font-weight: 300; color: var(--text); line-height: 1.5; }
+    #scr-upload-pending-delete-confirm .dialog-buttons { display: flex; align-items: stretch; }
+    #scr-upload-pending-delete-confirm .dialog-btn {
+      flex: 1; height: 64px; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 300; cursor: pointer;
+    }
+    #scr-upload-pending-delete-confirm .dialog-cancel { color: var(--text); border-right: .5px solid #bbbfc4; }
+    #scr-upload-pending-delete-confirm .dialog-confirm { color: #bd3734; }
+  </style>
+
+  <!-- the real upload-pending list underneath shows through, darkened by the
+       scrim; tapping the scrim cancels, same as キャンセル -->
+  <div class="scrim" data-tap="cancel:delete"></div>
+
+  <div class="dialog">
+    <div class="dialog-body">
+      <p class="dialog-title">リストから削除</p>
+      <p class="dialog-message">削除したログは復元できません</p>
+    </div>
+    <div class="dialog-buttons">
+      <div class="dialog-btn dialog-cancel" data-tap="cancel:delete">キャンセル</div>
+      <div class="dialog-btn dialog-confirm" data-tap="confirm:delete">削除</div>
+    </div>
+  </div>
+</section>

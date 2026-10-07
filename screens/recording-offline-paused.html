@@ -1,0 +1,84 @@
+<section class="board" id="scr-recording-offline-paused">
+  <style>
+    #scr-recording-offline-paused .screen{position:absolute; top:51px; left:0; right:0; bottom:0; display:flex; flex-direction:column; overflow:hidden;}
+    #scr-recording-offline-paused .header{flex-shrink:0; padding:26px 24px 0; display:flex; flex-direction:column; gap:32px;}
+    #scr-recording-offline-paused .title-row{display:flex; flex-direction:column; gap:20px;}
+    #scr-recording-offline-paused .title-edit-row{display:block;}
+    #scr-recording-offline-paused .title-placeholder{display:inline; font-size:24px; font-weight:600; color:var(--text); line-height:1.3; min-width:1px; white-space:normal; word-break:break-word;}
+    #scr-recording-offline-paused .title-edit-icon{width:20px; height:20px; display:inline-block; vertical-align:middle; margin-left:4px;}
+    #scr-recording-offline-paused .title-placeholder:empty ~ .title-edit-icon{display:none;}
+    #scr-recording-offline-paused .workspace-row{display:flex; align-items:center; gap:16px;}
+    #scr-recording-offline-paused .workspace-chip{display:flex; align-items:center; gap:4px; cursor:pointer;}
+    #scr-recording-offline-paused .workspace-chip img{display:block; width:16px; height:16px;}
+    #scr-recording-offline-paused .workspace-chip span{font-size:14px; font-weight:300; color:var(--text-weak);}
+    #scr-recording-offline-paused .tabs{display:flex; gap:20px;}
+    #scr-recording-offline-paused .tab{display:flex; flex-direction:column; gap:8px; padding:0 2px; cursor:pointer;}
+    #scr-recording-offline-paused .tab span{font-size:15px; line-height:1.5; white-space:nowrap;}
+    #scr-recording-offline-paused .tab.active span{font-weight:600; color:var(--text);}
+    #scr-recording-offline-paused .tab:not(.active) span{font-weight:300; color:var(--text-weak);}
+    #scr-recording-offline-paused .tab .bar{height:2px; border-radius:2px 2px 0 0; width:100%;}
+    #scr-recording-offline-paused .tab.active .bar{background:var(--text);}
+    #scr-recording-offline-paused .tab:not(.active) .bar{background:transparent;}
+    #scr-recording-offline-paused .content{flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:60px;}
+    #scr-recording-offline-paused .wave-area{width:100%; height:344px; background:var(--bg-weak); display:flex; align-items:center; justify-content:center; overflow:hidden;}
+    #scr-recording-offline-paused .wave-area img{width:222%; height:216px; max-width:none;}
+    #scr-recording-offline-paused .status-block{display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;}
+    #scr-recording-offline-paused .offline-caption{font-size:16px; font-weight:300; color:var(--text-faint); width:224px; margin:0; line-height:1;}
+    #scr-recording-offline-paused .big-timer{font-size:32px; font-weight:600; color:var(--text); margin:0; line-height:1;}
+    #scr-recording-offline-paused .bottombar{flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding:0 24px 24px;}
+    #scr-recording-offline-paused .actions{display:flex; align-items:center; gap:36px;}
+    #scr-recording-offline-paused .resume-btn{height:66px; width:116px; padding:9px 21px 9px 21px; border-radius:24px; background:var(--primary); display:flex; align-items:center; gap:8px; cursor:pointer; box-sizing:border-box;}
+    #scr-recording-offline-paused .resume-btn img{width:24px; height:24px; display:block;}
+    #scr-recording-offline-paused .resume-btn span{font-size:17px; font-weight:600; color:#fff; white-space:nowrap;}
+    #scr-recording-offline-paused .stop-btn{height:66px; padding:9px 24px; border-radius:24px; background:rgba(31,35,41,.05); display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:600; color:var(--text); cursor:pointer; white-space:nowrap;}
+  </style>
+
+  <!-- status bar -->
+  <div class="statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="screen">
+    <div class="header">
+      <div class="title-row">
+        <div class="title-edit-row">
+          <div class="title-placeholder" contenteditable="true" data-placeholder="タイトルを入力"></div>
+          <img class="title-edit-icon" src="../assets/icon-edit-pencil.svg" alt="" data-tap="focus:title-field">
+        </div>
+        <div class="workspace-row">
+          <div class="workspace-chip" data-tap="open:workspace-picker">
+            <img src="../assets/icon-workspace-building.svg" alt="">
+            <span class="js-group-value">UIUXデザイン</span>
+            <img src="../assets/icon-chevron-down-small.svg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" data-tap="switch-tab:recording"><span>録音</span><div class="bar"></div></div>
+        <div class="tab" data-tap="switch-tab:loginfo"><span>ログ情報</span><div class="bar"></div></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="wave-area">
+        <img src="../assets/waveform-static-large.svg" alt="">
+      </div>
+      <div class="status-block">
+        <p class="offline-caption">オフラインモードで録音します</p>
+        <p class="big-timer time-value">00:24</p>
+      </div>
+    </div>
+    <div class="bottombar">
+      <div class="actions">
+        <div class="resume-btn" data-tap="go:resume-recording">
+          <img src="../assets/icon-mic-resume-large.svg" alt="">
+          <span>再開</span>
+        </div>
+        <div class="stop-btn" data-tap="go:stop-recording">録音停止</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- home indicator -->
+  <div class="home-indicator"><i></i></div>
+</section>

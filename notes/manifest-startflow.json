@@ -1,0 +1,76 @@
+[
+  {
+    "slug": "recording-home-full",
+    "figmaNodeId": "5270:77474",
+    "title": "録音ホーム（グループ + オフライン + 英語モード）",
+    "fragmentFile": "screens/recording-home-full.html",
+    "description": "録音を開始する前のホーム画面。タイトル入力欄、アイドル状態の波形プレースホルダー、録音開始の大きいマイクFAB、グループ選択・オフラインモード・英語モードの設定行で構成される。マイクをタップすると録音開始（recording-active系画面）に遷移する想定。",
+    "tapTargets": [
+      {"dataTap": "open:side-menu", "label": "左上ハンバーガーメニュー", "guessedTarget": "サイドメニュー（recording-home-side-menu）を開く"},
+      {"dataTap": "focus:title-input", "label": "タイトルを入力 プレースホルダー", "guessedTarget": "タイトル入力欄にフォーカス（キーボード表示）"},
+      {"dataTap": "go:start-recording", "label": "緑色の大きいマイクFAB", "guessedTarget": "録音開始、recording-active系画面へ遷移"},
+      {"dataTap": "open:group-picker", "label": "グループ行（UIUXデザイン）", "guessedTarget": "グループ選択ピッカーを開く"},
+      {"dataTap": "toggle:offline-mode", "label": "オフラインモード トグル", "guessedTarget": "オフラインモードのON/OFF切り替え"},
+      {"dataTap": "toggle:english-mode", "label": "英語モード トグル", "guessedTarget": "英語モードのON/OFF切り替え"}
+    ],
+    "notes": "Figmaのレイヤー名は3つとも「録音画面」だが、実際は録音確認/カウントダウンではなく、この『録音前ホーム』画面の状態差分（5270:77474 / 77822 / 78170）。本画面はグループ短名＋オフライン＋英語モードの2トグルがある最も情報量の多いバリアント。グループ行の開閉アイコンが右シェブロン（›）なのに対し、他グループが作った recording-active.html や settings-general.html の同種の行は下矢印やアイコン違いを使っており、サイドバー間で統一されていない可能性があるので集約時に確認してほしい。"
+  },
+  {
+    "slug": "recording-home-offline-only",
+    "figmaNodeId": "5270:77822",
+    "title": "録音ホーム（グループ + オフラインのみ）",
+    "fragmentFile": "screens/recording-home-offline-only.html",
+    "description": "recording-home-full と同じ録音前ホーム画面の状態差分。英語モードのトグル行が無く、オフラインモードが最後の行になる。グループ名は短い「UIUXデザイン」のまま。",
+    "tapTargets": [
+      {"dataTap": "open:side-menu", "label": "左上ハンバーガーメニュー", "guessedTarget": "サイドメニュー（recording-home-side-menu）を開く"},
+      {"dataTap": "focus:title-input", "label": "タイトルを入力 プレースホルダー", "guessedTarget": "タイトル入力欄にフォーカス"},
+      {"dataTap": "go:start-recording", "label": "緑色の大きいマイクFAB", "guessedTarget": "録音開始、recording-active系画面へ遷移"},
+      {"dataTap": "open:group-picker", "label": "グループ行（UIUXデザイン）", "guessedTarget": "グループ選択ピッカーを開く"},
+      {"dataTap": "toggle:offline-mode", "label": "オフラインモード トグル", "guessedTarget": "オフラインモードのON/OFF切り替え"}
+    ],
+    "notes": "recording-home-full / recording-home-long-group と同じ『録音前ホーム』の状態バリアント（Figma上は3つとも『録音画面』という同一レイヤー名）。英語モード行の有無がこの3画面を分ける唯一の違いの一つ。英語モードが無い理由（機能オフ/地域差/単に未設定サンプルか）は不明なので要確認。"
+  },
+  {
+    "slug": "recording-home-long-group",
+    "figmaNodeId": "5270:78170",
+    "title": "録音ホーム（長いグループ名が省略表示）",
+    "fragmentFile": "screens/recording-home-long-group.html",
+    "description": "recording-home-full / recording-home-offline-only と同じ録音前ホーム画面の状態差分。グループ名が「プロダクトデザイン開発推進チーム統括本部」という長い文字列になっており、行の右側で省略記号(...)になるレイアウト確認用バリアントと思われる。英語モード行は無い。",
+    "tapTargets": [
+      {"dataTap": "open:side-menu", "label": "左上ハンバーガーメニュー", "guessedTarget": "サイドメニュー（recording-home-side-menu）を開く"},
+      {"dataTap": "focus:title-input", "label": "タイトルを入力 プレースホルダー", "guessedTarget": "タイトル入力欄にフォーカス"},
+      {"dataTap": "go:start-recording", "label": "緑色の大きいマイクFAB", "guessedTarget": "録音開始、recording-active系画面へ遷移"},
+      {"dataTap": "open:group-picker", "label": "グループ行（長いチーム名、省略表示）", "guessedTarget": "グループ選択ピッカーを開く"},
+      {"dataTap": "toggle:offline-mode", "label": "オフラインモード トグル", "guessedTarget": "オフラインモードのON/OFF切り替え"}
+    ],
+    "notes": "3つの『録音画面』バリアントのうち、長いグループ名での折り返し/省略挙動を確認するための状態と推測（断定はしていない）。Figmaのコードでは行全体に gap:16px、値テキストに flex:1 + 省略記号(ellipsis) が付いており、他の2バリアントの『値を右寄せでそのまま表示』とはレイアウトの実装が微妙に異なる（意図的な省略対応か、単なる別コンポーネントかは不明）。"
+  },
+  {
+    "slug": "recording-home-import-sheet",
+    "figmaNodeId": "5270:80787",
+    "title": "録音ホーム + 音声インポート ボトムシート",
+    "fragmentFile": "screens/recording-home-import-sheet.html",
+    "description": "録音前ホーム画面（recording-home-full と同じグループ/トグル構成）の上に『音声をインポート』ボトムシートが開いた状態。サイドメニューの『インポート』行から開く遷移だと推測。シートには「ファイルからインポート」と「他のアプリから取り込む方法」の2つの導線がある。",
+    "tapTargets": [
+      {"dataTap": "close:import-sheet", "label": "シート左上の×ボタン / シート外の暗転部分タップ", "guessedTarget": "シートを閉じて録音ホームに戻る"},
+      {"dataTap": "go:import-file-picker", "label": "「ファイルからインポート」ボタン", "guessedTarget": "OSのファイル選択UIを開く"},
+      {"dataTap": "open:import-other-apps-help", "label": "「他のアプリから取り込む方法」ボタン", "guessedTarget": "他アプリ共有シート経由の取り込み手順を説明する画面/ヘルプを開く"}
+    ],
+    "notes": "背景の録音ホームはこのスクリーンショットでは暗転・無効化されているため data-tap を付けていない（実機でもモーダル表示中は背後が操作不可のはず）。このシートの正式なトリガーはFigma上で直接は確認できなかったが、同バッチの recording-home-side-menu（5270:83412）のサイドメニューに『インポート』行があり、そこから開く遷移だと推測（確証はない。集約時に実際のフロー図と突き合わせてほしい）。背景のホーム画面はグループ=UIUXデザイン・オフライン/英語モード2トグルの構成（77474と同一データ）で描画した。"
+  },
+  {
+    "slug": "recording-home-side-menu",
+    "figmaNodeId": "5270:83412",
+    "title": "録音ホーム + 左サイドメニュー（ドロワー）",
+    "fragmentFile": "screens/recording-home-side-menu.html",
+    "description": "録音前ホーム画面の上にハンバーガーメニューから開く左サイドドロワーが重なった状態。ドロワーには『録音』（現在地、ハイライト表示）『アップロード待ち』（バッジ数値5）『インポート』のメニューリストと、下部に独立した『環境設定』行がある。",
+    "tapTargets": [
+      {"dataTap": "close:side-menu", "label": "ドロワー外の暗転部分タップ", "guessedTarget": "ドロワーを閉じて録音ホームに戻る"},
+      {"dataTap": "go:recording-home", "label": "『録音』メニュー行（ハイライト済み＝現在地）", "guessedTarget": "録音ホーム画面のまま（ドロワーを閉じるだけ、または自画面への遷移）"},
+      {"dataTap": "go:upload-queue", "label": "『アップロード待ち』メニュー行（バッジ『5』）", "guessedTarget": "アップロード待ちリスト画面へ遷移（この画面はこのバッチの担当範囲外のため未作成）"},
+      {"dataTap": "open:import-sheet", "label": "『インポート』メニュー行", "guessedTarget": "recording-home-import-sheet（5270:80787）のボトムシートを開く"},
+      {"dataTap": "go:settings", "label": "下部『環境設定』行", "guessedTarget": "設定画面（他グループ作成の settings-general.html）へ遷移"}
+    ],
+    "notes": "背景の録音ホームはこのスクリーンショットでは暗転・無効化されているため data-tap を付けていない。背景はグループ=UIUXデザイン・オフライン/英語モード2トグルの構成（77474と同一データ）で描画した。Figma上ではステータスバーがドロワーのさらに上のレイヤーとして重複して配置されていたため（暗転の上でも時刻/電波表示を視認させるためと思われる）、本フラグメントでも同じ構造（ステータスバーを最後に再配置）を踏襲した。『録音』行はアクティブ状態（背景#f2f3f5でハイライト）なので、タップしても実質ドロワーを閉じるだけの可能性が高い。"
+  }
+]

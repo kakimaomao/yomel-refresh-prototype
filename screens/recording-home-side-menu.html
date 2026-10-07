@@ -1,0 +1,57 @@
+<section class="board" id="scr-recording-home-side-menu">
+  <style>
+    #scr-recording-home-side-menu{ background:transparent; }
+
+    /* scrim + drawer */
+    #scr-recording-home-side-menu .scrim{position:absolute; inset:0; background:rgba(0,0,0,.5); z-index:10; cursor:pointer;}
+    #scr-recording-home-side-menu .drawer{position:absolute; left:0; top:0; width:342px; height:932px; background:#fff; box-sizing:border-box; padding:92px 16px 80px; display:flex; flex-direction:column; justify-content:space-between; cursor:default;}
+    #scr-recording-home-side-menu .drawer-top{display:flex; flex-direction:column; align-items:center; gap:44px;}
+    #scr-recording-home-side-menu .drawer-logo{height:16.06px; display:block;}
+    #scr-recording-home-side-menu .drawer-menu{width:100%; display:flex; flex-direction:column; gap:8px;}
+    #scr-recording-home-side-menu .drawer-item{width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px; border-radius:8px; cursor:pointer;}
+    #scr-recording-home-side-menu .drawer-item.active{background:#f2f3f5;}
+    #scr-recording-home-side-menu .drawer-item.active .drawer-badge{background:#fff;}
+    #scr-recording-home-side-menu .drawer-item .left{display:flex; align-items:center; gap:12px;}
+    #scr-recording-home-side-menu .drawer-item img{width:24px; height:24px; display:block;}
+    #scr-recording-home-side-menu .drawer-item span.label{font-size:17px; font-weight:300; color:var(--text);}
+    #scr-recording-home-side-menu .drawer-badge{width:24px; height:24px; border-radius:27px; background:rgba(100,106,115,.1); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:300; color:var(--text-weak);}
+    #scr-recording-home-side-menu .drawer-settings{width:100%; box-sizing:border-box; display:flex; align-items:center; gap:12px; padding:16px; border-radius:8px; cursor:pointer;}
+    #scr-recording-home-side-menu .drawer-settings.active{background:#f2f3f5;}
+    #scr-recording-home-side-menu .top-statusbar{z-index:20;}
+  </style>
+
+  <!-- the real recording-home screen underneath shows through — this
+       fragment is just the scrim + drawer overlay -->
+
+  <!-- side menu drawer -->
+  <div class="scrim" data-tap="close:side-menu">
+    <div class="drawer" data-tap="noop">
+      <div class="drawer-top">
+        <img class="drawer-logo" src="../assets/yomel-wordmark.svg" alt="YOMEL">
+        <div class="drawer-menu">
+          <div class="drawer-item active" data-tap="go:recording-home">
+            <div class="left"><img src="../assets/icon-mic-outline.svg" alt=""><span class="label">録音</span></div>
+          </div>
+          <div class="drawer-item" data-tap="go:upload-queue">
+            <div class="left"><img src="../assets/icon-upload-pending.svg" alt=""><span class="label">アップロード待ち</span></div>
+            <div class="drawer-badge">5</div>
+          </div>
+          <div class="drawer-item" data-tap="open:import-sheet">
+            <div class="left"><img src="../assets/icon-import.svg" alt=""><span class="label">インポート</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="drawer-settings" data-tap="go:settings">
+        <img src="../assets/icon-settings.svg" alt=""><span class="label">環境設定</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- status bar redrawn on top so it stays legible above the scrim -->
+  <div class="statusbar top-statusbar">
+    <span class="time">9:41</span>
+    <img class="right" src="../assets/statusbar-signal.svg" alt="" width="78.4" height="13">
+  </div>
+
+  <div class="home-indicator"><i></i></div>
+</section>
