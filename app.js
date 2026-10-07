@@ -421,14 +421,20 @@
 
   // simulated playback for whichever row's inline player is expanded — one
   // shared state object is enough since only one row is ever expanded at a
-  // time (same reasoning as the single <template> itself). Defaults match
-  // the template's own static markup (04:29 elapsed / 31:08 remaining, fill
-  // paused) so a freshly-expanded row needs no JS sync to look right.
-  var playerState = {playing: false, elapsedSec: 269, totalSec: 2137, timer: null};
+  // time (same reasoning as the single <template> itself). A freshly-expanded
+  // row always starts at 0 elapsed, with the total taken from that
+  // recording's own real duration (MOCK_RECORDINGS, "MM:SS") rather than a
+  // single fixed value shared by every row.
+  var playerState = {playing: false, elapsedSec: 0, totalSec: 0, timer: null};
   function formatPlayerTime(sec){
     sec = Math.max(0, Math.round(sec));
     var m = Math.floor(sec / 60), s = sec % 60;
     return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+  }
+  function parseDurationToSec(str){
+    var parts = (str || "").split(":").map(Number);
+    if(parts.length < 2 || parts.some(isNaN)) return 0;
+    return parts[0] * 60 + parts[1];
   }
   function updatePlayerUI(){
     var root = document.getElementById("scr-upload-pending-row-player");
@@ -481,8 +487,9 @@
     if(expandedRec !== num){
       playerState.playing = false;
       if(playerState.timer){ clearInterval(playerState.timer); playerState.timer = null; }
-      playerState.elapsedSec = 269;
-      playerState.totalSec = 2137;
+      playerState.elapsedSec = 0;
+      var rec = MOCK_RECORDINGS[num - 1];
+      playerState.totalSec = rec ? parseDurationToSec(rec.duration) : 0;
     }
     // A card needs to change if EITHER signal disagrees with the target:
     // - the "rec-card--expanded" class (the DOM's own record — this is what
@@ -1509,6 +1516,44 @@
       handleTap(slug, node.getAttribute("data-tap"), node);
     });
 
+    // draggable seek on the inline row player's progress track. A plain tap
+    // already seeks (pointerdown alone fires the first seekFromClientX), and
+    // dragging continues to track the pointer until release. The transition
+    // on .player-fill (smooth per-second ticking during playback) is turned
+    // off for the duration of the drag so the fill follows the pointer
+    // immediately instead of chasing it with a 1s lag.
+    var draggingTrack = null;
+    function seekFromClientX(track, clientX){
+      var rect = track.getBoundingClientRect();
+      var ratio = playerState.totalSec > 0 ? Math.min(1, Math.max(0, (clientX - rect.left) / rect.width)) : 0;
+      playerState.elapsedSec = Math.round(ratio * playerState.totalSec);
+      updatePlayerUI();
+    }
+    document.getElementById("stack").addEventListener("pointerdown", function(e){
+      var track = e.target.closest && e.target.closest(".player-track");
+      if(!track) return;
+      draggingTrack = track;
+      track.classList.add("dragging");
+      if(track.setPointerCapture){ try{ track.setPointerCapture(e.pointerId); }catch(err){} }
+      seekFromClientX(track, e.clientX);
+      e.preventDefault();
+    });
+    // move/up listen on document (not just #stack) so the drag keeps tracking
+    // correctly even if the pointer strays outside the track or the stack's
+    // own bounds before being released — setPointerCapture alone isn't
+    // enough to rely on across every environment this prototype runs in.
+    document.addEventListener("pointermove", function(e){
+      if(!draggingTrack) return;
+      seekFromClientX(draggingTrack, e.clientX);
+    });
+    function endTrackDrag(){
+      if(!draggingTrack) return;
+      draggingTrack.classList.remove("dragging");
+      draggingTrack = null;
+    }
+    document.addEventListener("pointerup", endTrackDrag);
+    document.addEventListener("pointercancel", endTrackDrag);
+
     document.getElementById("indexBtn").addEventListener("click", function(){
       document.getElementById("indexOverlay").classList.add("open");
     });
@@ -1529,6 +1574,11 @@
     applyMockData();
     updateUploadReminderBanner();
     setRec1GroupLabel("未選択");
+    // expandRowPlayer's own reset-on-switch only fires when `num` actually
+    // differs from the already-expanded row, which is never true the very
+    // first time (expandedRec defaults to 1, matching rec-1's own resync
+    // call) — so rec-1's real duration needs to be seeded here once up front.
+    playerState.totalSec = parseDurationToSec(MOCK_RECORDINGS[expandedRec - 1].duration);
     initSpaceIdInput();
     initEditableTitles();
     initSelectModeCheckboxes();

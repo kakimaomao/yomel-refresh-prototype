@@ -31,8 +31,9 @@
     #scr-upload-pending-row-player .rec-menu-btn { width: 20px; height: 20px; cursor: pointer; display: block; flex-shrink: 0; }
 
     #scr-upload-pending-row-player .player { margin-top: 20px; display: flex; flex-direction: column; gap: 20px; }
-    #scr-upload-pending-row-player .player-track { position: relative; height: 8px; border-radius: 24px; background: #e0e1e2; }
-    #scr-upload-pending-row-player .player-fill { position: absolute; left: 0; top: 0; height: 8px; width: 52px; border-radius: 24px; background: var(--text); transition: width 1s linear; }
+    #scr-upload-pending-row-player .player-track { position: relative; height: 8px; border-radius: 24px; background: #e0e1e2; cursor: pointer; touch-action: none; padding: 10px 0; margin: -10px 0; background-clip: content-box; box-sizing: content-box; }
+    #scr-upload-pending-row-player .player-fill { position: absolute; left: 0; top: 10px; height: 8px; width: 0%; border-radius: 24px; background: var(--text); transition: width 1s linear; pointer-events: none; }
+    #scr-upload-pending-row-player .player-track.dragging .player-fill { transition: none; }
     #scr-upload-pending-row-player .player-times { display: flex; justify-content: space-between; font-family: "Hiragino Sans", sans-serif; font-weight: 300; font-size: 12px; color: #929294; margin-top: 8px; }
     #scr-upload-pending-row-player .player-controls { display: flex; align-items: center; justify-content: space-between; }
     #scr-upload-pending-row-player .player-center { display: flex; align-items: center; gap: 19.5px; }
@@ -122,7 +123,7 @@
     <div class="player">
       <div>
         <div class="player-track"><div class="player-fill"></div></div>
-        <div class="player-times"><span>04:29</span><span>31:08</span></div>
+        <div class="player-times"><span>00:00</span><span>00:00</span></div>
       </div>
       <div class="player-controls">
         <img data-tap="delete:current" src="../assets/trash-icon-red.svg" width="24" height="24" alt="削除">
